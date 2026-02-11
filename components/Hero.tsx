@@ -1,7 +1,13 @@
+
 import React, { useState } from 'react';
 import { USER_INFO } from '../constants';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  isAdmin?: boolean;
+  onAdminClick?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ isAdmin, onAdminClick }) => {
   const [showVersion, setShowVersion] = useState(false);
 
   return (
@@ -55,12 +61,22 @@ const Hero: React.FC = () => {
           </div>
 
           {/* Working Button */}
-          <button 
-            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
-            className="px-10 py-4 bg-white text-black font-black uppercase text-xs tracking-[0.3em] rounded-full hover:bg-blue-600 hover:text-white transition-all shadow-2xl active:scale-95"
-          >
-            Explore Systems
-          </button>
+          <div className="flex flex-col items-center gap-4">
+            <button 
+              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+              className="px-10 py-4 bg-white text-black font-black uppercase text-xs tracking-[0.3em] rounded-full hover:bg-blue-600 hover:text-white transition-all shadow-2xl active:scale-95"
+            >
+              Explore Systems
+            </button>
+            {isAdmin && (
+              <button 
+                onClick={onAdminClick}
+                className="text-[10px] font-mono text-blue-500 uppercase tracking-widest hover:text-white transition-colors"
+              >
+                [ ADMIN_CMS_LINK ]
+              </button>
+            )}
+          </div>
         </div>
       </div>
 

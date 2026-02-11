@@ -10,7 +10,6 @@ import Documents from './components/Documents.tsx';
 import Contact from './components/Contact.tsx';
 import Account from './components/Account.tsx';
 import AdminPanel from './components/AdminPanel.tsx';
-import GeminiAssistant from './components/GeminiAssistant.tsx';
 import CustomCursor from './components/CustomCursor.tsx';
 import { USER_INFO } from './constants.tsx';
 import { UserProfile, PageId } from './types.ts';
@@ -29,7 +28,7 @@ const App: React.FC = () => {
       }
     }
 
-    // AI Navigation Listener
+    // Navigation Listener (Simplified since AI is removed)
     const handleNav = (e: any) => {
       const targetPage = e.detail as PageId;
       setActivePage(targetPage);
@@ -50,7 +49,7 @@ const App: React.FC = () => {
   const renderPage = () => {
     switch (activePage) {
       case 'home':
-        return <Hero />;
+        return <Hero isAdmin={userProfile?.role === 'admin'} onAdminClick={() => setActivePage('account')} />;
       case 'about':
         return <About />;
       case 'projects':
@@ -84,7 +83,7 @@ const App: React.FC = () => {
       case 'account':
         return <Account onAuthChange={setUserProfile} currentProfile={userProfile} />;
       default:
-        return <Hero />;
+        return <Hero isAdmin={userProfile?.role === 'admin'} onAdminClick={() => setActivePage('account')} />;
     }
   };
 
@@ -117,8 +116,6 @@ const App: React.FC = () => {
           </div>
         </div>
       </footer>
-
-      <GeminiAssistant />
     </div>
   );
 };
