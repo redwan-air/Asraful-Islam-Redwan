@@ -1,14 +1,16 @@
 -- ==========================================================
 -- ASRAFUL ISLAM REDWAN - DATABASE ARCHITECTURE (SUPABASE)
+-- IDEMPOTENT SETUP SCRIPT
 -- ==========================================================
 
--- 1. CORE SYSTEM: PROFILES & ACCESS CONTROL
+-- 1. SEQUENCES
 -- ----------------------------------------------------------
-
--- Create a custom sequence for User IDs (starting at 2002 as requested)
 CREATE SEQUENCE IF NOT EXISTS public.custom_id_seq START 2002;
 
--- Profiles table: Extends Supabase Auth users
+-- 2. TABLES
+-- ----------------------------------------------------------
+
+-- Profiles
 CREATE TABLE IF NOT EXISTS public.profiles (
   id UUID REFERENCES auth.users ON DELETE CASCADE NOT NULL PRIMARY KEY,
   full_name TEXT,
@@ -19,19 +21,6 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   avatar_url TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
-
--- Ensure RLS is enabled for profiles
-ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
-
--- Profiles Policies
-CREATE POLICY "Public profiles are viewable by everyone." ON public.profiles
-  FOR SELECT USING (true);
-
-CREATE POLICY "Users can update own profile." ON public.profiles
-  FOR UPDATE USING (auth.uid() = id);
-
--- 2. CONTENT TABLES: PROJECTS, SKILLS, GALLERY, DOCUMENTS
--- ----------------------------------------------------------
 
 -- Projects
 CREATE TABLE IF NOT EXISTS public.projects (
@@ -53,7 +42,7 @@ CREATE TABLE IF NOT EXISTS public.skills (
   sort_order INTEGER DEFAULT 0
 );
 
--- Gallery (Visual Assets)
+-- Gallery
 CREATE TABLE IF NOT EXISTS public.gallery (
   id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
@@ -65,7 +54,7 @@ CREATE TABLE IF NOT EXISTS public.gallery (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Documents (Repository)
+-- Documents
 CREATE TABLE IF NOT EXISTS public.documents (
   id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
@@ -78,62 +67,92 @@ CREATE TABLE IF NOT EXISTS public.documents (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
--- Enable RLS on all content tables
+-- 3. ROW LEVEL SECURITY (RLS)
+-- ----------------------------------------------------------
+ALTER TABLE public.profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.projects ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.skills ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.gallery ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.documents ENABLE ROW LEVEL SECURITY;
 
--- Content Policies (Public access for public items, admin access for all)
-CREATE POLICY "Public read projects" ON public.projects FOR SELECT USING (true);
-CREATE POLICY "Public read skills" ON public.skills FOR SELECT USING (true);
-
-CREATE POLICY "Gallery access policy" ON public.gallery FOR SELECT USING (
-  visibility = 'public' OR 
-  (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
-);
-
-CREATE POLICY "Document access policy" ON public.documents FOR SELECT USING (
-  visibility = 'public' OR 
-  (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
-);
-
--- 3. INITIAL SEED DATA (CONTENT)
+-- 4. POLICIES (DROP IF EXISTS THEN CREATE)
 -- ----------------------------------------------------------
 
--- Seed Projects
-INSERT INTO public.projects (title, description, tags, image_url) VALUES 
-('AlgoFlow Visualizer', 'A high-performance algorithm simulation engine.', ARRAY['C++', 'Algorithms', 'Logic'], 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80'),
-('Codeforces Analytics', 'Analyzing competitive programming trajectories.', ARRAY['C++', 'Data Structures'], 'https://images.unsplash.com/photo-1551288049-bbbda536639a?auto=format&fit=crop&w=800&q=80');
+-- Profiles
+DO $$ BEGIN
+    DROP POLICY IF EXISTS "Public profiles are viewable by everyone." ON public.profiles;
+    CREATE POLICY "Public profiles are viewable by everyone." ON public.profiles FOR SELECT USING (true);
+    
+    DROP POLICY IF EXISTS "Users can update own profile." ON public.profiles;
+    CREATE POLICY "Users can update own profile." ON public.profiles FOR UPDATE USING (auth.uid() = id);
+END $$;
 
--- Seed Skills
-INSERT INTO public.skills (name, icon, category, sort_order) VALUES 
+-- Projects
+DO $$ BEGIN
+    DROP POLICY IF EXISTS "Public read projects" ON public.projects;
+    CREATE POLICY "Public read projects" ON public.projects FOR SELECT USING (true);
+END $$;
+
+-- Skills
+DO $$ BEGIN
+    DROP POLICY IF EXISTS "Public read skills" ON public.skills;
+    CREATE POLICY "Public read skills" ON public.skills FOR SELECT USING (true);
+END $$;
+
+-- Gallery
+DO $$ BEGIN
+    DROP POLICY IF EXISTS "Gallery access policy" ON public.gallery;
+    CREATE POLICY "Gallery access policy" ON public.gallery FOR SELECT USING (
+      visibility = 'public' OR 
+      (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
+    );
+END $$;
+
+-- Documents
+DO $$ BEGIN
+    DROP POLICY IF EXISTS "Document access policy" ON public.documents;
+    CREATE POLICY "Document access policy" ON public.documents FOR SELECT USING (
+      visibility = 'public' OR 
+      (SELECT role FROM public.profiles WHERE id = auth.uid()) = 'admin'
+    );
+END $$;
+
+-- 5. SEED DATA (CONTENT)
+-- ----------------------------------------------------------
+
+-- Projects (Using ON CONFLICT to avoid errors on re-run)
+INSERT INTO public.projects (title, description, tags, image_url)
+VALUES 
+('AlgoFlow Visualizer', 'A high-performance algorithm simulation engine.', ARRAY['C++', 'Algorithms', 'Logic'], 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80'),
+('Codeforces Analytics', 'Analyzing competitive programming trajectories.', ARRAY['C++', 'Data Structures'], 'https://images.unsplash.com/photo-1551288049-bbbda536639a?auto=format&fit=crop&w=800&q=80')
+ON CONFLICT DO NOTHING;
+
+-- Skills
+INSERT INTO public.skills (name, icon, category, sort_order)
+VALUES 
 ('C++', '🚀', 'backend', 1),
 ('Algorithms', '🧠', 'other', 2),
 ('Graph Theory', '🕸️', 'other', 3),
 ('Problem Solving', '🧩', 'other', 4),
-('Data Structures', '📊', 'other', 5);
+('Data Structures', '📊', 'other', 5)
+ON CONFLICT DO NOTHING;
 
--- Seed Gallery
-INSERT INTO public.gallery (id, title, description, date_time, label, image_url, visibility) VALUES 
-('g-logo', 'Official Logo', 'The official identity logo of Asraful Islam Redwan', '2026-02-02 17:52', 'Official', 'https://i.postimg.cc/HkYKGYnb/logo.png', 'public'),
-('g-private-1', 'Unreleased Blueprint', 'Confidential architectural drawing.', '2026-02-05 10:00', 'Official', 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80', 'private');
+-- Gallery
+INSERT INTO public.gallery (id, title, description, date_time, label, image_url, visibility)
+VALUES 
+('g-logo', 'Official Logo', 'The official identity logo of Asraful Islam Redwan', '2026-02-02 17:52', 'Official', 'https://i.postimg.cc/HkYKGYnb/logo.png', 'public')
+ON CONFLICT (id) DO UPDATE SET title = EXCLUDED.title;
 
--- 4. IDENTITY SEEDING (MANUAL STEP)
+-- 6. IDENTITY SETUP NOTES
 -- ----------------------------------------------------------
+-- Step 1: Sign up through the website.
+-- Step 2: Go to Supabase SQL Editor and find the user's UUID in auth.users.
+-- Step 3: Run the relevant query below:
 
--- IMPORTANT: You must sign up these users via the website UI first to get their UUIDs.
--- Once signed up, find their 'id' in the 'auth.users' table and run these updates:
+-- FOR ADMIN (REDWAN):
+-- UPDATE public.profiles SET role = 'admin', custom_id = '1001', access_key = 'MASTER_KEY' WHERE id = 'PASTE_UUID_HERE';
 
--- [ADMIN] PROMOTE REDWAN
--- UPDATE public.profiles 
--- SET role = 'admin', custom_id = '1001', access_key = 'MASTER_KEY', full_name = 'Asraful Islam Redwan'
--- WHERE id = 'PASTE_ACTUAL_UUID_HERE';
+-- FOR USER (UID 2216):
+-- UPDATE public.profiles SET custom_id = '2216', access_key = 'AIR-2216-KEY' WHERE id = 'PASTE_UUID_HERE';
 
--- [USER] CONFIGURE DEFAULT USER 2216
--- UPDATE public.profiles 
--- SET custom_id = '2216', access_key = 'AIR-2216-KEY', full_name = 'Default User'
--- WHERE id = 'PASTE_ACTUAL_UUID_HERE';
-
--- Force PostgREST to reload schema
 NOTIFY pgrst, 'reload schema';
