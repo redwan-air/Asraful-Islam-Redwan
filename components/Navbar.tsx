@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { UserProfile, PageId } from '../types.ts';
 
 interface NavbarProps {
@@ -10,6 +10,18 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate, isAuth, userProfile }) => {
+  const [isGlowing, setIsGlowing] = useState(false);
+
+  useEffect(() => {
+    const handleGlow = () => {
+      setIsGlowing(true);
+      setTimeout(() => setIsGlowing(false), 3000); // Glow for 3 seconds
+    };
+
+    window.addEventListener('glowSidebar', handleGlow);
+    return () => window.removeEventListener('glowSidebar', handleGlow);
+  }, []);
+
   const navLinks: { name: string; id: PageId }[] = [
     { name: 'About', id: 'about' },
     { name: 'Work', id: 'projects' },
@@ -27,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate, isAuth, userPro
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-4 w-full max-w-max">
-      <div className="glass-premium px-8 py-4 rounded-full flex items-center gap-6 shadow-2xl border-white/10 group/nav">
+      <div className={`glass-premium px-8 py-4 rounded-full flex items-center gap-6 shadow-2xl border-white/10 group/nav transition-all duration-500 ${isGlowing ? 'animate-rainbow-glow border-opacity-100 scale-105' : 'border-opacity-10'}`}>
         <button 
           onClick={(e) => handleLinkClick(e, 'home')} 
           className="flex items-center group/logo focus:outline-none relative"

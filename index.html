@@ -27,12 +27,21 @@
             animation: {
               'pulse-slow': 'pulse-bright 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'shimmer': 'shimmer 2s linear infinite',
+              'rainbow-glow': 'rainbow-glow 2s linear infinite',
             },
             keyframes: {
               shimmer: { '100%': { transform: 'translateX(100%)' } },
               'pulse-bright': {
                 '0%, 100%': { opacity: '0.5', filter: 'brightness(1)' },
                 '50%': { opacity: '1', filter: 'brightness(2)' },
+              },
+              'rainbow-glow': {
+                '0%, 100%': { 'border-color': '#ff0000', 'box-shadow': '0 0 15px rgba(255, 0, 0, 0.5)' },
+                '16%': { 'border-color': '#ffff00', 'box-shadow': '0 0 15px rgba(255, 255, 0, 0.5)' },
+                '33%': { 'border-color': '#00ff00', 'box-shadow': '0 0 15px rgba(0, 255, 0, 0.5)' },
+                '50%': { 'border-color': '#00ffff', 'box-shadow': '0 0 15px rgba(0, 255, 255, 0.5)' },
+                '66%': { 'border-color': '#0000ff', 'box-shadow': '0 0 15px rgba(0, 0, 255, 0.5)' },
+                '83%': { 'border-color': '#ff00ff', 'box-shadow': '0 0 15px rgba(255, 0, 255, 0.5)' },
               }
             }
           }

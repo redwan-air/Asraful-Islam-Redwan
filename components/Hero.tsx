@@ -10,6 +10,12 @@ interface HeroProps {
 const Hero: React.FC<HeroProps> = ({ isAdmin, onAdminClick }) => {
   const [showVersion, setShowVersion] = useState(false);
 
+  const handleExplore = () => {
+    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
+    // Dispatch custom event for the navbar glow effect
+    window.dispatchEvent(new CustomEvent('glowSidebar'));
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-20">
       {/* Cinematic Background Lighting */}
@@ -63,7 +69,7 @@ const Hero: React.FC<HeroProps> = ({ isAdmin, onAdminClick }) => {
           {/* Working Button */}
           <div className="flex flex-col items-center gap-4">
             <button 
-              onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+              onClick={handleExplore}
               className="px-10 py-4 bg-white text-black font-black uppercase text-xs tracking-[0.3em] rounded-full hover:bg-blue-600 hover:text-white transition-all shadow-2xl active:scale-95"
             >
               Explore Systems
