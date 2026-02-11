@@ -15,13 +15,6 @@ export const PROJECTS: Project[] = [
     description: 'A tool for competitive programmers to analyze their rating trajectories and problem difficulty distribution using optimized data processing.',
     tags: ['C++', 'Data Structures'],
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bbbda536639a?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: '3',
-    title: 'C++ Sandbox Judge',
-    description: 'A local sandbox system for safely executing code logic. Designed for competitive programming practice with strict resource limits.',
-    tags: ['C++', 'Systems'],
-    imageUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc48?auto=format&fit=crop&w=800&q=80'
   }
 ];
 
@@ -40,11 +33,32 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     description: 'This is the official logo of Asraful Islam Redwan',
     dateTime: '2026-02-02 17:52',
     label: 'Official',
-    imageUrl: 'https://i.postimg.cc/HkYKGYnb/logo.png'
+    imageUrl: 'https://i.postimg.cc/HkYKGYnb/logo.png',
+    visibility: 'public'
+  },
+  {
+    id: 'g-private-1',
+    title: 'Unreleased Project Blueprint',
+    description: 'A confidential architectural drawing of a next-gen CP engine.',
+    dateTime: '2026-02-05 10:00',
+    label: 'Official',
+    imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
+    visibility: 'private'
   }
 ];
 
-export const DOCUMENT_ITEMS: DocumentItem[] = [];
+export const DOCUMENT_ITEMS: DocumentItem[] = [
+  {
+    id: 'doc-private-1',
+    title: 'Strategic Roadmap 2026',
+    description: 'Confidential development goals and personal milestones.',
+    dateTime: '2026-02-01 12:00',
+    labels: ['Official', 'Private'],
+    fileUrl: '#',
+    fileType: 'PDF',
+    visibility: 'private'
+  }
+];
 
 export const USER_INFO = {
   name: 'Redwan',

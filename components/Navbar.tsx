@@ -5,9 +5,10 @@ import { PageId } from '../App';
 interface NavbarProps {
   activePage: PageId;
   onNavigate: (page: PageId) => void;
+  isAuth: boolean;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
+const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate, isAuth }) => {
   const navLinks: { name: string; id: PageId }[] = [
     { name: 'About', id: 'about' },
     { name: 'Work', id: 'projects' },
@@ -40,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
           )}
         </button>
         
-        <div className="hidden md:flex items-center gap-6">
+        <div className="flex items-center gap-6">
           {navLinks.map((link) => (
             <button
               key={link.id}
@@ -55,16 +56,19 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
               )}
             </button>
           ))}
+          
+          <button
+            onClick={(e) => handleLinkClick(e, 'account')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all border font-bold uppercase text-[9px] tracking-widest ${
+              activePage === 'account' 
+                ? 'bg-blue-600 text-white border-blue-500' 
+                : 'glass border-white/5 text-slate-400 hover:text-white'
+            }`}
+          >
+            {isAuth ? 'Profile' : 'Login'}
+            {isAuth && <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>}
+          </button>
         </div>
-
-        <div className="h-4 w-[1px] bg-white/10 hidden md:block"></div>
-        
-        <button 
-          onClick={(e) => handleLinkClick(e, 'contact')}
-          className="text-[10px] font-black uppercase tracking-widest bg-white text-black px-5 py-2 rounded-full hover:bg-blue-600 hover:text-white transition-all whitespace-nowrap focus:outline-none shadow-xl shadow-white/5 active:scale-95"
-        >
-          Hire
-        </button>
       </div>
     </nav>
   );

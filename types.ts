@@ -1,4 +1,6 @@
 
+export type Visibility = 'public' | 'private';
+
 export interface Project {
   id: string;
   title: string;
@@ -26,6 +28,7 @@ export interface GalleryItem {
   dateTime: string;
   label: 'Official' | 'Unofficial';
   imageUrl: string;
+  visibility: Visibility;
 }
 
 export interface DocumentItem {
@@ -36,4 +39,14 @@ export interface DocumentItem {
   labels: string[]; // e.g., ['Official', 'PDF']
   fileUrl: string;
   fileType: string;
+  visibility: Visibility;
+}
+
+export interface UserProfile {
+  id: string;
+  customId: string;
+  email: string;
+  accessKey: string;
+  role: 'admin' | 'user';
+  grantedResources: string[]; // List of IDs they can see
 }
