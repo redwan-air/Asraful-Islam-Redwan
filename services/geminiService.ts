@@ -1,27 +1,25 @@
 import { GoogleGenAI } from "@google/genai";
-import { USER_INFO } from "../constants.tsx";
+import { USER_INFO, GALLERY_ITEMS, DOCUMENT_ITEMS, PROJECTS } from "../constants.tsx";
 
-// System instruction for the assistant
 const systemInstruction = `
-  You are the AI assistant for Asraful Islam Redwan's personal portfolio website. 
-  Your job is to answer questions about Redwan based on the following information:
-  - Name: ${USER_INFO.fullName}
-  - Professional Goal: Student and Competitive Programmer.
-  - Education: ${USER_INFO.education}
-  - Bio: ${USER_INFO.about}
-  - Location: ${USER_INFO.location}
-  - Contact Email: ${USER_INFO.email}
-  - WhatsApp: Direct Message via "Message on WhatsApp" button in the Connect section.
-  - Key Strengths: Algorithms (Dynamic Programming, Graph Theory), Data Structures, and specifically C++. 
-  - Note: Redwan only knows C++ as his primary programming language currently.
+  You are the "Official Website Guide" for Asraful Islam Redwan's portfolio.
+  Your ONLY purpose is to provide specific metadata about website content. 
   
-  Be analytical, friendly, and concise—reflecting the mind of a competitive programmer. 
-  If someone wants to hire or contact Redwan, direct them to his email (${USER_INFO.email}) or the "Connect" section on the website.
-  Keep responses under 3 sentences unless asked for deep technical detail.
+  CONTEXT:
+  - Sections: Home, About, Work (Projects), Tech (Skills), Gallery, Docs, Connect, Account.
+  - Projects: ${PROJECTS.map(p => `${p.title} (ID: ${p.id})`).join(", ")}
+  - Gallery Files: ${GALLERY_ITEMS.map(i => `ID: ${i.id}, Label: ${i.label}, Date: ${i.dateTime}, Visibility: ${i.visibility}`).join(" | ")}
+  - Documents: ${DOCUMENT_ITEMS.map(d => `ID: ${d.id}, Labels: ${d.labels.join(",")}, Date: ${d.dateTime}, Visibility: ${d.visibility}`).join(" | ")}
+  
+  RULES:
+  1. ONLY SPECIFIC TALK. No conversational filler, no "Hello", no "How can I help?".
+  2. Answer directly with locations, IDs, labels, or dates.
+  3. If asked about a file, state its Section, Label, and Date.
+  4. Response must be ultra-short (under 15 words).
+  5. Speed is priority. 
 `;
 
 export const getGeminiResponse = async (prompt: string) => {
-  // Always initialize GoogleGenAI with process.env.API_KEY directly and inside the call
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   try {
     const response = await ai.models.generateContent({
@@ -29,14 +27,13 @@ export const getGeminiResponse = async (prompt: string) => {
       contents: prompt,
       config: {
         systemInstruction,
-        temperature: 0.7,
-        topP: 0.9,
+        temperature: 0.1, // Low temperature for consistency and speed
+        maxOutputTokens: 50,
       },
     });
-    // The response.text property directly returns the string output as a property.
-    return response.text || "I'm sorry, I couldn't generate a response right now.";
+    return response.text?.trim() || "Data unavailable.";
   } catch (error) {
     console.error("Gemini API Error:", error);
-    return "The AI terminal is currently offline. Please reach out to Redwan directly via email!";
+    return "Terminal Offline.";
   }
 };

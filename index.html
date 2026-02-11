@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Asraful Islam Redwan | Systems Architect & Problem Solver</title>
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/g0CxRJvX/Official_Logo_(12).png" />
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/HkYKGYnb/logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,12 +33,16 @@
               }
             },
             animation: {
-              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'pulse-slow': 'pulse-bright 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'shimmer': 'shimmer 2s linear infinite',
             },
             keyframes: {
               shimmer: {
                 '100%': { transform: 'translateX(100%)' },
+              },
+              'pulse-bright': {
+                '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                '50%': { opacity: '1', transform: 'scale(1.1)', filter: 'brightness(1.5)' },
               }
             }
           }
@@ -56,6 +60,7 @@
         color: #f8fafc;
         overflow-x: hidden;
         margin: 0;
+        cursor: none; /* Hide default cursor to allow custom one to take over completely */
       }
       body::before {
         content: "";
@@ -93,6 +98,11 @@
       ::-webkit-scrollbar { width: 5px; }
       ::-webkit-scrollbar-track { background: var(--bg); }
       ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+      
+      /* Ensure interactive elements don't show default cursor */
+      a, button, [role="button"], input, select, textarea {
+        cursor: none !important;
+      }
     </style>
     <script type="importmap">
 {

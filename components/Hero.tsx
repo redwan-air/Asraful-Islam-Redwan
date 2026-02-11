@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { USER_INFO } from '../constants';
 
@@ -19,17 +18,6 @@ const Hero: React.FC = () => {
       <div className="relative z-10 w-full max-w-5xl">
         <div className="flex flex-col items-center space-y-10">
           
-          {/* Status Badge */}
-          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border-white/5 animate-fade-in">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-emerald-400 uppercase">
-              System Ready // Status: Exploring
-            </span>
-          </div>
-
           {/* Main Typography */}
           <div className="text-center space-y-4">
             <h2 className="text-blue-500 font-mono text-sm uppercase tracking-[0.4em] mb-2 opacity-70">
@@ -62,7 +50,7 @@ const Hero: React.FC = () => {
             </div>
             <div className="glass-premium p-6 rounded-3xl text-center group">
               <p className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mb-2">Location</p>
-              <p className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Dhaka, BD</p>
+              <p className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Sylhet, BD</p>
             </div>
           </div>
         </div>

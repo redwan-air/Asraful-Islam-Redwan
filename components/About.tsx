@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { USER_INFO } from '../constants.tsx';
 
@@ -12,7 +11,7 @@ const About: React.FC = () => {
           <div className="md:w-1/3 space-y-12 sticky top-32">
             <div>
               <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.3em] mb-4 block">/ Profile</span>
-              <h2 className="text-5xl font-black text-white tracking-tighter leading-none mb-6">Redwan.</h2>
+              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none mb-6">Asraful Islam Redwan.</h2>
               <div className="h-1 w-12 bg-blue-600 mb-8"></div>
               <p className="text-slate-400 leading-relaxed font-medium">
                 Passionate student and competitive programmer focused on mastering complex algorithms and low-level optimization using C++.

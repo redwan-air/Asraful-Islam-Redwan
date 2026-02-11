@@ -1,4 +1,3 @@
-
 import { Project, Skill, GalleryItem, DocumentItem } from './types';
 
 export const PROJECTS: Project[] = [
@@ -72,7 +71,7 @@ export const USER_INFO = {
     problemsSolved: 'Developing...',
     rating: '0'
   },
-  location: 'Sylhet, Bangladesh',
+  location: 'Sylhet, BD',
   email: 'inbox.air01@gmail.com',
   whatsapp: '01345156553',
   github: 'https://github.com/redwan',
