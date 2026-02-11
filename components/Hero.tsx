@@ -1,47 +1,94 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { USER_INFO } from '../constants';
 
 const Hero: React.FC = () => {
+  const [showVersion, setShowVersion] = useState(false);
+
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4">
-      {/* Dynamic Background */}
-      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(17,24,39,1)_0%,rgba(3,7,18,1)_100%)]"></div>
-      <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-blue-600/5 blur-[120px] rounded-full animate-glow"></div>
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6 pt-20">
+      {/* Cinematic Background Lighting */}
+      <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-blue-600/10 blur-[150px] rounded-full"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-600/10 blur-[150px] rounded-full"></div>
       
-      {/* Subtle Mesh */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
+      {/* Decorative Grid */}
+      <div className="absolute inset-0 opacity-[0.05] pointer-events-none" 
+        style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }}>
+      </div>
 
-      <div className="relative z-10 w-full max-w-4xl text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-[10px] font-mono tracking-widest uppercase mb-8">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-          </span>
-          Phase 0: Problem Solving Journey
-        </div>
-
-        <h1 className="text-6xl md:text-9xl font-black tracking-tighter leading-none mb-6">
-          <span className="text-white opacity-95">{USER_INFO.name}</span>
-          <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500 text-glow">
-            {USER_INFO.cpStats.codeforces.toUpperCase()}
-          </span>
-        </h1>
-
-        <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 font-medium leading-relaxed mb-12">
-          An aspiring <span className="text-white">Software Engineer</span> grounding his logic in Competitive Programming. Currently at rating 0, building the foundations for something massive.
-        </p>
-
-        <div className="flex flex-wrap justify-center gap-4">
-          <div className="glass px-8 py-5 rounded-[2rem] text-center border-white/5 hover:border-blue-500/20 transition-all group">
-            <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">Current Rating</p>
-            <p className="text-3xl font-bold text-white group-hover:text-blue-400 transition-colors">{USER_INFO.cpStats.rating}</p>
+      <div className="relative z-10 w-full max-w-5xl">
+        <div className="flex flex-col items-center space-y-10">
+          
+          {/* Status Badge */}
+          <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full glass border-white/5 animate-fade-in">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-[10px] font-mono font-bold tracking-[0.2em] text-emerald-400 uppercase">
+              System Ready // Status: Exploring
+            </span>
           </div>
-          <div className="glass px-8 py-5 rounded-[2rem] text-center border-white/5 hover:border-blue-500/20 transition-all group">
-            <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">Target</p>
-            <p className="text-3xl font-bold text-white group-hover:text-indigo-400 transition-colors">Grandmaster</p>
+
+          {/* Main Typography */}
+          <div className="text-center space-y-4">
+            <h2 className="text-blue-500 font-mono text-sm uppercase tracking-[0.4em] mb-2 opacity-70">
+              The Personal Portfolio of
+            </h2>
+            <h1 className="text-7xl md:text-[10rem] font-black tracking-tight leading-[0.85] text-white">
+              {USER_INFO.name.toUpperCase()}
+              <span className="text-blue-600">.</span>
+            </h1>
+          </div>
+
+          {/* Tagline / Introduction */}
+          <p className="max-w-2xl text-center text-xl md:text-2xl text-slate-400 font-light leading-relaxed text-balance">
+            Building highly efficient systems through <span className="text-white font-medium italic underline decoration-blue-500/50 underline-offset-8">algorithmic precision</span> and creative engineering.
+          </p>
+
+          {/* Metadata Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-3xl pt-8">
+            <div className="glass-premium p-6 rounded-3xl text-center group">
+              <p className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mb-2">Role</p>
+              <p className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Software Engineer</p>
+            </div>
+            <div className="glass-premium p-6 rounded-3xl text-center group">
+              <p className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mb-2">Focus</p>
+              <p className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Algorithms</p>
+            </div>
+            <div className="glass-premium p-6 rounded-3xl text-center group">
+              <p className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mb-2">Rank</p>
+              <p className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">{USER_INFO.cpStats.codeforces}</p>
+            </div>
+            <div className="glass-premium p-6 rounded-3xl text-center group">
+              <p className="text-[9px] font-mono text-slate-500 uppercase tracking-widest mb-2">Location</p>
+              <p className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Dhaka, BD</p>
+            </div>
           </div>
         </div>
+      </div>
+
+      {/* Version Information Button */}
+      <div className="absolute bottom-8 left-8 z-[100] group">
+        {showVersion && (
+          <div className="absolute bottom-full left-0 mb-4 px-6 py-3 glass-premium rounded-2xl animate-in slide-in-from-bottom-2 duration-300">
+             <p className="text-[10px] font-mono text-blue-400 uppercase tracking-widest mb-1">System Version</p>
+             <p className="text-sm font-bold text-white">{USER_INFO.version}</p>
+          </div>
+        )}
+        <button 
+          onMouseEnter={() => setShowVersion(true)}
+          onMouseLeave={() => setShowVersion(false)}
+          onClick={() => setShowVersion(!showVersion)}
+          className="w-12 h-12 glass rounded-2xl flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/10 transition-all shadow-xl"
+        >
+          <span className="font-serif italic font-bold text-lg">i</span>
+        </button>
+      </div>
+
+      {/* Visual Scroll/Navigation Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center opacity-20">
+        <div className="w-[1px] h-16 bg-gradient-to-b from-white to-transparent"></div>
       </div>
     </section>
   );

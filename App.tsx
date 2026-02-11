@@ -1,15 +1,18 @@
 
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import About from './components/About';
-import Projects from './components/Projects';
-import Skills from './components/Skills';
-import Contact from './components/Contact';
-import GeminiAssistant from './components/GeminiAssistant';
-import { USER_INFO } from './constants';
+import Navbar from './components/Navbar.tsx';
+import Hero from './components/Hero.tsx';
+import About from './components/About.tsx';
+import Projects from './components/Projects.tsx';
+import Skills from './components/Skills.tsx';
+import Contact from './components/Contact.tsx';
+import Gallery from './components/Gallery.tsx';
+import Documents from './components/Documents.tsx';
+import GeminiAssistant from './components/GeminiAssistant.tsx';
+import CustomCursor from './components/CustomCursor.tsx';
+import { USER_INFO } from './constants.tsx';
 
-export type PageId = 'home' | 'about' | 'projects' | 'skills' | 'contact';
+export type PageId = 'home' | 'about' | 'projects' | 'skills' | 'contact' | 'gallery' | 'documents';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<PageId>('home');
@@ -24,6 +27,10 @@ const App: React.FC = () => {
         return <Projects />;
       case 'skills':
         return <Skills />;
+      case 'gallery':
+        return <Gallery />;
+      case 'documents':
+        return <Documents />;
       case 'contact':
         return <Contact />;
       default:
@@ -33,6 +40,7 @@ const App: React.FC = () => {
 
   return (
     <div className="relative min-h-screen bg-[#030712] text-slate-200 selection:bg-blue-500/30 flex flex-col">
+      <CustomCursor />
       <Navbar activePage={activePage} onNavigate={setActivePage} />
       
       <main className="flex-grow animate-in fade-in duration-700">

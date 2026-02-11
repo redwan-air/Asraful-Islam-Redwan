@@ -27,15 +27,15 @@ const Contact: React.FC = () => {
               rel="noopener noreferrer" 
               className="flex-1 px-8 py-6 glass rounded-[2rem] border-white/5 hover:border-emerald-500/30 hover:bg-white/5 transition-all text-left group"
             >
-              <span className="block text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2">WhatsApp</span>
-              <span className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">+{USER_INFO.whatsapp}</span>
+              <span className="block text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2">Instant Chat</span>
+              <span className="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors">Message on WhatsApp</span>
             </a>
           </div>
         </div>
 
         <div className="flex justify-center gap-12 pt-12">
-          <a href={USER_INFO.github} className="text-slate-500 hover:text-white transition-colors uppercase font-mono text-xs tracking-widest">GitHub</a>
-          <a href={USER_INFO.linkedin} className="text-slate-500 hover:text-white transition-colors uppercase font-mono text-xs tracking-widest">LinkedIn</a>
+          <a href={USER_INFO.github} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors uppercase font-mono text-xs tracking-widest">GitHub</a>
+          <a href={USER_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors uppercase font-mono text-xs tracking-widest">LinkedIn</a>
         </div>
       </div>
     </section>
