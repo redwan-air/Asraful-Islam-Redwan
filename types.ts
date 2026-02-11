@@ -1,4 +1,3 @@
-
 export type Visibility = 'public' | 'private';
 
 export interface Project {
@@ -44,9 +43,11 @@ export interface DocumentItem {
 
 export interface UserProfile {
   id: string;
-  customId: string;
+  full_name: string;
+  custom_id: string;
   email: string;
-  accessKey: string;
+  access_key: string;
   role: 'admin' | 'user';
-  grantedResources: string[]; // List of IDs they can see
+  granted_resources: string[]; // List of IDs they can see
+  avatar_url?: string;
 }

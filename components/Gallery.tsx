@@ -1,4 +1,3 @@
-
 import React, { useState, useMemo } from 'react';
 import { GALLERY_ITEMS } from '../constants.tsx';
 import { GalleryItem } from '../types.ts';
@@ -42,11 +41,12 @@ const Gallery: React.FC<GalleryProps> = ({ hasAccess }) => {
   };
 
   return (
-    <section className="min-h-screen pb-32 relative px-6">
+    <section className="min-h-screen pt-40 pb-32 relative px-6">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12">
         
+        {/* Sidebar */}
         <div className="md:w-1/4 space-y-8">
-          <div className="glass-premium p-8 rounded-[2.5rem] border-white/5">
+          <div className="glass-premium p-8 rounded-[2.5rem] border-white/5 sticky top-32">
             <h3 className="text-blue-500 font-mono text-[10px] uppercase tracking-[0.2em] mb-6">Visible Assets</h3>
             <div className="space-y-6">
               {recentUploads.map(item => (
@@ -63,10 +63,14 @@ const Gallery: React.FC<GalleryProps> = ({ hasAccess }) => {
                   </div>
                 </div>
               ))}
+              {recentUploads.length === 0 && (
+                 <p className="text-[10px] text-slate-600 font-mono italic">No recent assets found.</p>
+              )}
             </div>
           </div>
         </div>
 
+        {/* Main Content Area */}
         <div className="md:w-3/4 space-y-12">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
@@ -79,7 +83,7 @@ const Gallery: React.FC<GalleryProps> = ({ hasAccess }) => {
                 placeholder="Search archive..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-slate-900 border border-white/5 rounded-full px-6 py-3 text-xs text-white focus:outline-none focus:border-blue-500/50 w-64 shadow-xl"
+                className="bg-slate-900 border border-white/10 rounded-full px-6 py-3 text-xs text-white focus:outline-none focus:border-blue-500/50 w-full md:w-64 shadow-xl transition-all"
               />
             </div>
           </div>
@@ -115,14 +119,20 @@ const Gallery: React.FC<GalleryProps> = ({ hasAccess }) => {
                 </div>
               </div>
             ))}
+            {filteredItems.length === 0 && (
+              <div className="col-span-full py-20 text-center glass-premium rounded-[3rem] border-white/5">
+                 <p className="text-slate-500 font-mono text-sm uppercase tracking-widest">No matching assets in archive</p>
+              </div>
+            )}
           </div>
         </div>
       </div>
 
+      {/* Lightbox */}
       {selectedImage && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 sm:p-12">
           <div className="absolute inset-0 bg-slate-950/90 backdrop-blur-xl" onClick={() => setSelectedImage(null)}></div>
-          <div className="relative glass-premium rounded-[3rem] max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row shadow-2xl">
+          <div className="relative glass-premium rounded-[3rem] max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row shadow-2xl animate-in zoom-in duration-300">
             <div className="md:w-2/3 h-[40vh] md:h-auto bg-slate-900 flex items-center justify-center overflow-hidden">
               <img src={selectedImage.imageUrl} className="max-w-full max-h-full object-contain" alt="" />
             </div>
@@ -134,7 +144,7 @@ const Gallery: React.FC<GalleryProps> = ({ hasAccess }) => {
                 </div>
                 <div>
                   <h3 className="text-3xl font-black text-white mb-4 tracking-tighter">{selectedImage.title}</h3>
-                  <p className="text-slate-400 text-sm">{selectedImage.description}</p>
+                  <p className="text-slate-400 text-sm leading-relaxed">{selectedImage.description}</p>
                 </div>
                 <div className="p-4 bg-slate-900/50 rounded-2xl border border-white/5 font-mono">
                   <p className="text-[9px] text-slate-600 mb-1 uppercase">Object ID</p>

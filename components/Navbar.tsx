@@ -1,14 +1,15 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageId } from '../App';
+import { UserProfile } from '../types.ts';
 
 interface NavbarProps {
   activePage: PageId;
   onNavigate: (page: PageId) => void;
   isAuth: boolean;
+  userProfile?: UserProfile | null;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate, isAuth }) => {
+const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate, isAuth, userProfile }) => {
   const navLinks: { name: string; id: PageId }[] = [
     { name: 'About', id: 'about' },
     { name: 'Work', id: 'projects' },
@@ -65,8 +66,12 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate, isAuth }) => {
                 : 'glass border-white/5 text-slate-400 hover:text-white'
             }`}
           >
-            {isAuth ? 'Profile' : 'Login'}
-            {isAuth && <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>}
+            {isAuth && userProfile?.avatar_url ? (
+              <img src={userProfile.avatar_url} alt="" className="w-5 h-5 rounded-full object-cover" />
+            ) : (
+              isAuth ? 'Profile' : 'Login'
+            )}
+            {isAuth && !userProfile?.avatar_url && <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>}
           </button>
         </div>
       </div>

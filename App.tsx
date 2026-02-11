@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.tsx';
 import Hero from './components/Hero.tsx';
@@ -32,7 +31,7 @@ const App: React.FC = () => {
     if (visibility === 'public') return true;
     if (!userProfile) return false;
     if (userProfile.role === 'admin') return true;
-    return userProfile.grantedResources.includes(resourceId) || userProfile.grantedResources.includes('*');
+    return userProfile.granted_resources.includes(resourceId) || userProfile.granted_resources.includes('*');
   };
 
   const renderPage = () => {
@@ -47,17 +46,25 @@ const App: React.FC = () => {
         return <Skills />;
       case 'gallery':
         return (
-          <div className="max-w-7xl mx-auto">
-             {userProfile?.role === 'admin' && <div className="pt-32 px-6"><AdminPanel /></div>}
-             <Gallery hasAccess={hasAccess} />
-          </div>
+          <>
+            {userProfile?.role === 'admin' && (
+              <div className="max-w-7xl mx-auto pt-40 px-6 -mb-20">
+                <AdminPanel />
+              </div>
+            )}
+            <Gallery hasAccess={hasAccess} />
+          </>
         );
       case 'documents':
         return (
-          <div className="max-w-7xl mx-auto">
-             {userProfile?.role === 'admin' && <div className="pt-32 px-6"><AdminPanel /></div>}
-             <Documents hasAccess={hasAccess} />
-          </div>
+          <>
+            {userProfile?.role === 'admin' && (
+              <div className="max-w-7xl mx-auto pt-40 px-6 -mb-20">
+                <AdminPanel />
+              </div>
+            )}
+            <Documents hasAccess={hasAccess} />
+          </>
         );
       case 'contact':
         return <Contact />;
@@ -71,7 +78,7 @@ const App: React.FC = () => {
   return (
     <div className="relative min-h-screen bg-[#030712] text-slate-200 selection:bg-blue-500/30 flex flex-col">
       <CustomCursor />
-      <Navbar activePage={activePage} onNavigate={setActivePage} isAuth={!!userProfile} />
+      <Navbar activePage={activePage} onNavigate={setActivePage} isAuth={!!userProfile} userProfile={userProfile} />
       
       <main className="flex-grow animate-in fade-in duration-700">
         {renderPage()}
@@ -93,7 +100,6 @@ const App: React.FC = () => {
         </div>
       </footer>
 
-      {/* Floating AI Terminal Assistant */}
       <GeminiAssistant />
     </div>
   );
