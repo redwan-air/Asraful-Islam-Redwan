@@ -1,8 +1,11 @@
-
 import React from 'react';
 import { PROJECTS } from '../constants';
 
 const Projects: React.FC = () => {
+  const handleCaseStudy = (title: string) => {
+    alert(`Opening Detailed Case Study for: ${title}`);
+  };
+
   return (
     <section className="min-h-screen pt-40 pb-32 bg-slate-950/20 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-500/5 blur-[120px] rounded-full pointer-events-none"></div>
@@ -56,15 +59,15 @@ const Projects: React.FC = () => {
                 </div>
 
                 <div className="pt-6">
-                  <a 
-                    href="#" 
-                    className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white hover:text-blue-400 transition-all group/link"
+                  <button 
+                    onClick={() => handleCaseStudy(project.title)}
+                    className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-white hover:text-blue-400 transition-all group/link active:scale-95"
                   >
                     Explore Case Study
                     <svg className="w-4 h-4 transform group-hover/link:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>

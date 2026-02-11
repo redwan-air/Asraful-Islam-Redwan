@@ -53,6 +53,14 @@ const Hero: React.FC = () => {
               <p className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">Sylhet, BD</p>
             </div>
           </div>
+
+          {/* Working Button */}
+          <button 
+            onClick={() => window.scrollTo({ top: window.innerHeight, behavior: 'smooth' })}
+            className="px-10 py-4 bg-white text-black font-black uppercase text-xs tracking-[0.3em] rounded-full hover:bg-blue-600 hover:text-white transition-all shadow-2xl active:scale-95"
+          >
+            Explore Systems
+          </button>
         </div>
       </div>
 
@@ -67,7 +75,6 @@ const Hero: React.FC = () => {
         <button 
           onMouseEnter={() => setShowVersion(true)}
           onMouseLeave={() => setShowVersion(false)}
-          onClick={() => setShowVersion(!showVersion)}
           className="w-12 h-12 glass rounded-2xl flex items-center justify-center text-slate-500 hover:text-white hover:bg-white/10 transition-all shadow-xl"
         >
           <span className="font-serif italic font-bold text-lg">i</span>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { PageId } from '../App';
-import { UserProfile } from '../types.ts';
+
+import React from 'react';
+import { UserProfile, PageId } from '../types.ts';
 
 interface NavbarProps {
   activePage: PageId;

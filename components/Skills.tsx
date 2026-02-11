@@ -1,8 +1,14 @@
-
 import React from 'react';
-import { SKILLS } from '../constants';
+import { SKILLS, USER_INFO } from '../constants';
 
 const Skills: React.FC = () => {
+  const handleDownloadCV = () => {
+    // In a real application, this would be a link to a PDF.
+    // For now, we simulate a successful download trigger.
+    alert(`Initializing secure download for ${USER_INFO.fullName}'s Technical CV...`);
+    // Example: window.open('path/to/cv.pdf', '_blank');
+  };
+
   return (
     <section className="min-h-screen pt-40 pb-32 relative">
       <div className="max-w-6xl mx-auto px-6">
@@ -43,7 +49,10 @@ const Skills: React.FC = () => {
                I am currently deep-diving into <span className="text-blue-400 font-medium">Distributed Systems</span> and <span className="text-blue-400 font-medium">Low-level optimization in Rust</span>, aiming to engineer infrastructures that process millions of events per second with minimal latency.
              </p>
           </div>
-          <button className="px-8 py-4 glass text-xs font-bold uppercase tracking-widest text-white rounded-full group-hover:bg-white group-hover:text-black transition-all">
+          <button 
+            onClick={handleDownloadCV}
+            className="px-8 py-4 glass text-xs font-bold uppercase tracking-widest text-white rounded-full group-hover:bg-white group-hover:text-black transition-all active:scale-95"
+          >
             Download Tech CV
           </button>
         </div>

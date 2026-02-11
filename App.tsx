@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.tsx';
 import Hero from './components/Hero.tsx';
@@ -12,9 +13,7 @@ import AdminPanel from './components/AdminPanel.tsx';
 import GeminiAssistant from './components/GeminiAssistant.tsx';
 import CustomCursor from './components/CustomCursor.tsx';
 import { USER_INFO } from './constants.tsx';
-import { UserProfile } from './types.ts';
-
-export type PageId = 'home' | 'about' | 'projects' | 'skills' | 'gallery' | 'documents' | 'contact' | 'account';
+import { UserProfile, PageId } from './types.ts';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<PageId>('home');
@@ -23,8 +22,22 @@ const App: React.FC = () => {
   useEffect(() => {
     const saved = localStorage.getItem('redwan_auth');
     if (saved) {
-      setUserProfile(JSON.parse(saved));
+      try {
+        setUserProfile(JSON.parse(saved));
+      } catch (e) {
+        console.error("Auth Restore Fail", e);
+      }
     }
+
+    // AI Navigation Listener
+    const handleNav = (e: any) => {
+      const targetPage = e.detail as PageId;
+      setActivePage(targetPage);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    window.addEventListener('navTo', handleNav);
+    return () => window.removeEventListener('navTo', handleNav);
   }, []);
 
   const hasAccess = (resourceId: string, visibility: 'public' | 'private') => {
@@ -46,25 +59,25 @@ const App: React.FC = () => {
         return <Skills />;
       case 'gallery':
         return (
-          <>
+          <div id="gallery">
             {userProfile?.role === 'admin' && (
               <div className="max-w-7xl mx-auto pt-40 px-6 -mb-20">
                 <AdminPanel />
               </div>
             )}
             <Gallery hasAccess={hasAccess} />
-          </>
+          </div>
         );
       case 'documents':
         return (
-          <>
+          <div id="documents">
             {userProfile?.role === 'admin' && (
               <div className="max-w-7xl mx-auto pt-40 px-6 -mb-20">
                 <AdminPanel />
               </div>
             )}
             <Documents hasAccess={hasAccess} />
-          </>
+          </div>
         );
       case 'contact':
         return <Contact />;
@@ -81,6 +94,11 @@ const App: React.FC = () => {
       <Navbar activePage={activePage} onNavigate={setActivePage} isAuth={!!userProfile} userProfile={userProfile} />
       
       <main className="flex-grow animate-in fade-in duration-700">
+        <div id="home"></div>
+        <div id="about"></div>
+        <div id="projects"></div>
+        <div id="skills"></div>
+        <div id="contact"></div>
         {renderPage()}
       </main>
 

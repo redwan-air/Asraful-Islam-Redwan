@@ -3,19 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Asraful Islam Redwan | Systems Architect & Problem Solver</title>
+    <title>Asraful Islam Redwan | Systems Architect</title>
     <link rel="icon" type="image/png" href="https://i.postimg.cc/HkYKGYnb/logo.png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
-    <!-- Environment Shim -->
     <script>
-      window.process = { env: { API_KEY: "" } };
-      window.onerror = function(msg, url, line, col, error) {
-        console.error("Critical Runtime Error:", msg, "at", url, ":", line);
-      };
+      // API Key injection from user request
+      window.process = { env: { API_KEY: "AIzaSyC83TYBfUMTXPI9qhTiFUCzi2rexV0_xuk" } };
     </script>
 
     <script>
@@ -26,23 +23,15 @@
               sans: ['Plus Jakarta Sans', 'sans-serif'],
               mono: ['JetBrains Mono', 'monospace'],
             },
-            colors: {
-              accent: {
-                blue: '#3b82f6',
-                emerald: '#10b981',
-              }
-            },
             animation: {
               'pulse-slow': 'pulse-bright 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'shimmer': 'shimmer 2s linear infinite',
             },
             keyframes: {
-              shimmer: {
-                '100%': { transform: 'translateX(100%)' },
-              },
+              shimmer: { '100%': { transform: 'translateX(100%)' } },
               'pulse-bright': {
-                '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-                '50%': { opacity: '1', transform: 'scale(1.1)', filter: 'brightness(1.5)' },
+                '0%, 100%': { opacity: '0.5', filter: 'brightness(1)' },
+                '50%': { opacity: '1', filter: 'brightness(2)' },
               }
             }
           }
@@ -52,7 +41,6 @@
     <style>
       :root {
         --bg: #020617;
-        --card: #0f172a;
         --border: rgba(255, 255, 255, 0.08);
       }
       body {
@@ -60,49 +48,18 @@
         color: #f8fafc;
         overflow-x: hidden;
         margin: 0;
-        cursor: none; /* Hide default cursor to allow custom one to take over completely */
-      }
-      body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        opacity: 0.04;
-        z-index: 9999;
-        pointer-events: none;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-      }
-      .glass {
-        background: rgba(15, 23, 42, 0.6);
-        backdrop-filter: blur(16px);
-        border: 1px solid var(--border);
+        cursor: none !important; /* Force hide default cursor */
       }
       .glass-premium {
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
       }
-      .bento-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      }
-      .bento-card:hover {
-        border-color: rgba(59, 130, 246, 0.5);
-        transform: translateY(-4px);
-        box-shadow: 0 20px 40px -20px rgba(59, 130, 246, 0.3);
-      }
-      ::-webkit-scrollbar { width: 5px; }
-      ::-webkit-scrollbar-track { background: var(--bg); }
-      ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-      
-      /* Ensure interactive elements don't show default cursor */
-      a, button, [role="button"], input, select, textarea {
+      a, button, [role="button"], input {
         cursor: none !important;
       }
+      ::-webkit-scrollbar { width: 4px; }
+      ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
     <script type="importmap">
 {

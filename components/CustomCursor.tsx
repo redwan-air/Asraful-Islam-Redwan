@@ -10,7 +10,7 @@ const CustomCursor: React.FC = () => {
     const onMouseMove = (e: MouseEvent) => {
       if (!isVisible) setIsVisible(true);
       if (cursorRef.current) {
-        // Direct DOM manipulation for zero-latency tracking
+        // Direct DOM update for 1:1 mouse tracking (Zero Latency)
         cursorRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
       }
     };
@@ -22,7 +22,6 @@ const CustomCursor: React.FC = () => {
         target.tagName === 'BUTTON' || 
         target.closest('button') || 
         target.closest('a') ||
-        target.getAttribute('role') === 'button' ||
         target.classList.contains('cursor-pointer');
       
       setIsHovered(!!isInteractive);
@@ -59,31 +58,30 @@ const CustomCursor: React.FC = () => {
       style={{ willChange: 'transform', transition: 'none' }}
     >
       <div className="relative flex items-center justify-center">
-        
-        {/* OUTER GLOW (Deep Atmosphere) */}
+        {/* Layer 1: Wide Soft Aura */}
         <div 
-          className={`absolute rounded-full bg-blue-600/10 transition-all duration-500 ease-out ${
-            isHovered ? 'w-32 h-32 blur-[40px]' : 'w-20 h-20 blur-[30px]'
+          className={`absolute rounded-full bg-blue-600/10 transition-all duration-700 ease-out ${
+            isHovered ? 'w-40 h-40 blur-[50px]' : 'w-24 h-24 blur-[30px]'
           }`}
         />
 
-        {/* MID GLOW (Brightening Layer) - Pulses to look "brighter and brighter" */}
+        {/* Layer 2: Intensifying Mid Glow (Brighter and Brighter Pulse) */}
         <div 
           className={`absolute rounded-full bg-blue-400/30 blur-[20px] animate-pulse-slow transition-all duration-300 ${
-            isHovered ? 'w-24 h-24 opacity-80' : 'w-14 h-14 opacity-50'
-          } ${isClicking ? 'scale-150 bg-blue-300/60' : 'scale-100'}`}
+            isHovered ? 'w-28 h-28 opacity-90' : 'w-16 h-16 opacity-60'
+          } ${isClicking ? 'scale-150 bg-blue-300/50' : 'scale-100'}`}
         />
 
-        {/* INNER CORE (The Source) */}
+        {/* Layer 3: Sharp White Core */}
         <div 
-          className={`absolute rounded-full bg-white transition-all duration-150 shadow-[0_0_15px_rgba(255,255,255,0.8)] ${
-            isClicking ? 'w-2.5 h-2.5' : 'w-1.5 h-1.5'
+          className={`absolute rounded-full bg-white transition-all duration-150 shadow-[0_0_20px_rgba(255,255,255,0.9)] ${
+            isClicking ? 'w-3 h-3' : 'w-1.5 h-1.5'
           } ${isHovered ? 'scale-150' : 'scale-100'}`}
         />
 
-        {/* INTERACTIVE RING */}
+        {/* Outer Contact Ring */}
         <div 
-          className={`absolute rounded-full border border-blue-400/50 transition-all duration-500 ease-out ${
+          className={`absolute rounded-full border border-blue-400/40 transition-all duration-500 ease-out ${
             isHovered ? 'w-16 h-16 opacity-100 scale-100' : 'w-0 h-0 opacity-0 scale-50'
           }`}
         />

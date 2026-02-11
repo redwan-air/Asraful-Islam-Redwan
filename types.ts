@@ -1,4 +1,6 @@
+
 export type Visibility = 'public' | 'private';
+export type PageId = 'home' | 'about' | 'projects' | 'skills' | 'gallery' | 'documents' | 'contact' | 'account';
 
 export interface Project {
   id: string;
