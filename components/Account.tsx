@@ -171,7 +171,7 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
             <span className="font-black text-red-300">SYSTEM_FAULT:</span> {error.msg}
             {error.code === 'REGISTRY_SYNC_FAIL' && (
               <div className="mt-2 pt-2 border-t border-red-500/20">
-                <p className="text-white/60">সমাধান: Supabase Dashboard -> SQL Editor -> Paste database_setup.sql -> Run.</p>
+                <p className="text-white/60">সমাধান: Supabase Dashboard &rarr; SQL Editor &rarr; Paste database_setup.sql &rarr; Run.</p>
               </div>
             )}
           </div>
