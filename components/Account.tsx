@@ -19,18 +19,26 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
-  const fetchProfileWithRetry = async (userId: string, retries = 5): Promise<UserProfile | null> => {
-    for (let i = 0; i < retries; i++) {
+  // Faster polling for registration, immediate check for login
+  const fetchProfile = async (userId: string, isNewUser: boolean): Promise<UserProfile | null> => {
+    const maxRetries = isNewUser ? 10 : 1; // Retry more for new users, only once for login
+    const delay = 300; // 300ms delay between checks
+
+    for (let i = 0; i < maxRetries; i++) {
       const { data, error: fetchError } = await supabase
         .from('profiles')
         .select('*')
         .eq('id', userId)
         .single();
       
-      if (data) return data as UserProfile;
+      if (data && data.custom_id) return data as UserProfile;
       
-      console.log(`Sync Attempt ${i + 1}...`);
-      await new Promise(resolve => setTimeout(resolve, 1500 + i * 500));
+      if (isNewUser) {
+        console.log(`Syncing profile... attempt ${i + 1}`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      } else {
+        break; // Don't loop for login if not found immediately
+      }
     }
     return null;
   };
@@ -50,11 +58,11 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
 
         if (authError) throw authError;
 
-        const profileData = await fetchProfileWithRetry(data.user?.id || '');
+        const profileData = await fetchProfile(data.user?.id || '', false);
         if (!profileData) {
           setError({
-            msg: "আপনার একাউন্ট তৈরি হয়েছে কিন্তু ডাটাবেজ সিঙ্ক হয়নি। দয়া করে Supabase SQL Editor-এ গিয়ে database_setup.sql কোডটি রান করুন।",
-            code: "REGISTRY_SYNC_FAIL"
+            msg: "Profile record not found. Please ensure your account setup is complete.",
+            code: "REGISTRY_MISSING"
           });
           return;
         }
@@ -75,19 +83,20 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
         if (authError) throw authError;
 
         if (data.user && data.session === null) {
-          setSuccessMsg("রেজিস্ট্রেশন সফল! আপনার ইমেইল ইনবক্স চেক করুন ভেরিফিকেশন লিঙ্কের জন্য।");
+          setSuccessMsg("Check your email for the verification link!");
         } else if (data.user) {
-          const profileData = await fetchProfileWithRetry(data.user.id);
+          // New user signup success
+          const profileData = await fetchProfile(data.user.id, true);
           if (profileData) {
             onAuthChange(profileData);
           } else {
-            setSuccessMsg("রেজিস্ট্রেশন হয়েছে। এখন লগইন পোর্টালে গিয়ে প্রবেশ করুন।");
+            setSuccessMsg("Account created! Please login now.");
             setIsLogin(true);
           }
         }
       }
     } catch (err: any) {
-      setError({ msg: err.message || "একটি অজানা সমস্যা হয়েছে।" });
+      setError({ msg: err.message || "An authentication error occurred." });
     } finally {
       setLoading(false);
     }
@@ -169,11 +178,6 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
         {error && (
           <div className="mb-8 p-5 bg-red-500/10 border border-red-500/20 rounded-2xl text-red-500 text-[10px] font-mono leading-relaxed">
             <span className="font-black text-red-300">SYSTEM_FAULT:</span> {error.msg}
-            {error.code === 'REGISTRY_SYNC_FAIL' && (
-              <div className="mt-2 pt-2 border-t border-red-500/20">
-                <p className="text-white/60">সমাধান: Supabase Dashboard &rarr; SQL Editor &rarr; Paste database_setup.sql &rarr; Run.</p>
-              </div>
-            )}
           </div>
         )}
         
@@ -216,7 +220,7 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
             </button>
           </div>
           <button type="submit" disabled={loading} className="w-full py-5 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-blue-500 transition-all disabled:opacity-50 mt-4 text-[11px] shadow-lg shadow-blue-600/20">
-            {loading ? 'PROCESSING...' : (isLogin ? 'AUTHORIZE_SESSION' : 'START_REGISTRY')}
+            {loading ? 'AUTHORIZING...' : (isLogin ? 'INITIATE_SESSION' : 'BEGIN_REGISTRY')}
           </button>
         </form>
         <button onClick={() => setIsLogin(!isLogin)} className="w-full mt-8 text-[10px] font-mono text-slate-600 hover:text-blue-400 uppercase tracking-widest transition-colors">
