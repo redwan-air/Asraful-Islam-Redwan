@@ -16,16 +16,17 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
   const [fullName, setFullName] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    setSuccessMsg(null);
 
     try {
       if (isLogin) {
-        // Strict Supabase Login
         const { data, error: authError } = await supabase.auth.signInWithPassword({
           email, 
           password,
@@ -33,7 +34,6 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
 
         if (authError) throw authError;
 
-        // Fetch profile created by DB trigger
         const { data: profileData, error: profileError } = await supabase
           .from('profiles')
           .select('*')
@@ -44,7 +44,6 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
         onAuthChange(profileData);
 
       } else {
-        // Signup with metadata for the DB trigger
         const { data, error: authError } = await supabase.auth.signUp({
           email,
           password,
@@ -56,10 +55,10 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
         });
         
         if (authError) throw authError;
+
         if (data.user && data.session === null) {
-          setError("Check your email for the confirmation link!");
+          setSuccessMsg("Registry entry initiated! Please check your email to confirm your identity.");
         } else if (data.user) {
-          // Trigger will have created the profile by now
           const { data: profileData } = await supabase
             .from('profiles')
             .select('*')
@@ -131,7 +130,19 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
     <section className="min-h-screen pt-40 flex flex-col items-center px-6 pb-20">
       <div className="w-full max-w-md glass-premium p-10 rounded-[3rem] shadow-2xl border-white/10">
         <h2 className="text-3xl font-black text-white mb-6 tracking-tight">{isLogin ? 'Access Portal.' : 'Identity Registry.'}</h2>
-        {error && <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-[10px] font-mono">ERROR: {error}</div>}
+        
+        {error && (
+          <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-[10px] font-mono">
+            ERROR: {error}
+          </div>
+        )}
+        
+        {successMsg && (
+          <div className="mb-6 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-emerald-500 text-[10px] font-mono">
+            SUCCESS: {successMsg}
+          </div>
+        )}
+
         <form onSubmit={handleAuth} className="space-y-4">
           {!isLogin && (
             <div>
