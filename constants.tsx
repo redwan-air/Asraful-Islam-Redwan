@@ -1,3 +1,4 @@
+
 import { Project, Skill, GalleryItem, DocumentItem } from './types';
 
 export const PROJECTS: Project[] = [
@@ -29,28 +30,19 @@ export const GALLERY_ITEMS: GalleryItem[] = [
   {
     id: 'g-logo',
     title: 'Official Logo',
-    description: 'This is the official logo of Asraful Islam Redwan',
-    dateTime: '2026-02-02 17:52',
+    description: 'The official visual identity of Asraful Islam Redwan.',
+    dateTime: '2026-02-12 10:00',
     label: 'Official',
     imageUrl: 'https://i.postimg.cc/HkYKGYnb/logo.png',
     visibility: 'public'
-  },
-  {
-    id: 'g-private-1',
-    title: 'Unreleased Project Blueprint',
-    description: 'A confidential architectural drawing of a next-gen CP engine.',
-    dateTime: '2026-02-05 10:00',
-    label: 'Official',
-    imageUrl: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80',
-    visibility: 'private'
   }
 ];
 
 export const DOCUMENT_ITEMS: DocumentItem[] = [
   {
     id: 'doc-private-1',
-    title: 'Strategic Roadmap 2026',
-    description: 'Confidential development goals and personal milestones.',
+    title: 'Development Roadmap',
+    description: 'Confidential strategic goals for the current academic year.',
     dateTime: '2026-02-01 12:00',
     labels: ['Official', 'Private'],
     fileUrl: '#',
@@ -63,8 +55,8 @@ export const USER_INFO = {
   name: 'Redwan',
   fullName: 'Asraful Islam Redwan',
   title: 'Competitive Programmer & Student',
-  about: 'I am a problem solver at heart. Currently focused on mastering C++ and Competitive Programming. I believe in the elegance of logic and the power of efficient code.',
-  education: 'Govt. Madan Mohan College | 2025-NOW | Intermediate',
+  about: 'Driven by logic and efficiency. Specializing in high-performance C++ systems and algorithmic optimization. Current mission: Mastering intermediate academic challenges while competing on a global stage.',
+  education: 'Govt. Madan Mohan College | 2025-NOW',
   cpStats: {
     codeforces: 'Newbie',
     leetCode: 'Contestant',
@@ -76,5 +68,5 @@ export const USER_INFO = {
   whatsapp: '01345156553',
   github: 'https://github.com/redwan',
   linkedin: 'https://linkedin.com/in/redwan',
-  version: '1.02.0'
+  version: '2.5.0'
 };
