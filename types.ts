@@ -1,6 +1,17 @@
 
 export type Visibility = 'public' | 'private';
-export type PageId = 'home' | 'about' | 'projects' | 'skills' | 'gallery' | 'documents' | 'contact' | 'account';
+export type PageId = 'home' | 'about' | 'projects' | 'skills' | 'gallery' | 'documents' | 'contact';
+
+// Fix: Added missing UserProfile interface used for authentication and account states
+export interface UserProfile {
+  id: string;
+  full_name: string | null;
+  role: 'admin' | 'user';
+  avatar_url?: string;
+  custom_id?: string;
+  access_key?: string;
+  granted_resources?: string[];
+}
 
 export interface Project {
   id: string;
@@ -41,15 +52,4 @@ export interface DocumentItem {
   fileUrl: string;
   fileType: string;
   visibility: Visibility;
-}
-
-export interface UserProfile {
-  id: string;
-  full_name: string;
-  custom_id: string;
-  email: string;
-  access_key: string;
-  role: 'admin' | 'user';
-  granted_resources: string[]; // List of IDs they can see
-  avatar_url?: string;
 }

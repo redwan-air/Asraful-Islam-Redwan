@@ -1,15 +1,8 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { USER_INFO } from '../constants';
 
-interface HeroProps {
-  isAdmin?: boolean;
-  onAdminClick?: () => void;
-}
-
-const Hero: React.FC<HeroProps> = ({ isAdmin, onAdminClick }) => {
-  const [showVersion, setShowVersion] = useState(false);
-
+const Hero: React.FC = () => {
   const handleExplore = () => {
     window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
     window.dispatchEvent(new CustomEvent('glowSidebar'));
@@ -32,7 +25,7 @@ const Hero: React.FC<HeroProps> = ({ isAdmin, onAdminClick }) => {
           <div className="text-center space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/5 backdrop-blur-sm animate-in fade-in slide-in-from-top-4 duration-700">
               <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-pulse"></span>
-              <span className="text-[10px] font-mono text-blue-400 uppercase tracking-[0.3em] font-bold">Registry Active</span>
+              <span className="text-[10px] font-mono text-blue-400 uppercase tracking-[0.3em] font-bold">System Online</span>
             </div>
             
             <div className="space-y-2">
@@ -72,14 +65,6 @@ const Hero: React.FC<HeroProps> = ({ isAdmin, onAdminClick }) => {
               <span className="relative z-10">Explore System</span>
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </button>
-            {isAdmin && (
-              <button 
-                onClick={onAdminClick}
-                className="text-[10px] font-mono text-slate-600 uppercase tracking-widest hover:text-blue-500 transition-colors"
-              >
-                [ ROOT_ACCESS_CONSOLE ]
-              </button>
-            )}
           </div>
         </div>
       </div>

@@ -1,20 +1,16 @@
+
 import React, { useState, useMemo } from 'react';
 import { DOCUMENT_ITEMS } from '../constants.tsx';
 
-interface DocumentsProps {
-  hasAccess: (id: string, visibility: 'public' | 'private') => boolean;
-}
-
-const Documents: React.FC<DocumentsProps> = ({ hasAccess }) => {
+const Documents: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredItems = useMemo(() => {
     return DOCUMENT_ITEMS.filter(item => {
-      if (!hasAccess(item.id, item.visibility)) return false;
       const searchStr = `${item.title} ${item.description} ${item.labels.join(' ')} ${item.id}`.toLowerCase();
       return searchStr.includes(searchTerm.toLowerCase());
     });
-  }, [searchTerm, hasAccess]);
+  }, [searchTerm]);
 
   const handleDownload = (e: React.MouseEvent, url: string, title: string) => {
     e.preventDefault();
@@ -38,7 +34,7 @@ const Documents: React.FC<DocumentsProps> = ({ hasAccess }) => {
           <div className="w-full md:w-96 relative">
             <input 
               type="text" 
-              placeholder="Search by Title, ID, or Label..."
+              placeholder="Search registry..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-slate-900 border border-white/10 rounded-2xl px-8 py-5 text-sm text-white focus:outline-none focus:border-blue-500/50 shadow-2xl transition-all"
@@ -49,7 +45,6 @@ const Documents: React.FC<DocumentsProps> = ({ hasAccess }) => {
           </div>
         </div>
 
-        {/* Short Query Shortcut Bar */}
         <div className="flex flex-wrap gap-3">
           <span className="text-[10px] font-mono text-slate-600 uppercase tracking-widest self-center mr-2">Short Queries:</span>
           {['Official', 'Private', 'PDF', 'Roadmap'].map(label => (
@@ -81,9 +76,7 @@ const Documents: React.FC<DocumentsProps> = ({ hasAccess }) => {
                       <button 
                         key={label}
                         onClick={() => setSearchTerm(label)}
-                        className={`text-[8px] font-black uppercase px-3 py-1 rounded-full border transition-all ${
-                          label === 'Private' ? 'bg-amber-500/10 text-amber-500 border-amber-500/20' : 'bg-slate-800/10 text-slate-500 border-slate-500/20 hover:text-blue-400'
-                        }`}
+                        className="text-[8px] font-black uppercase px-3 py-1 rounded-full border border-slate-500/20 bg-slate-800/10 text-slate-500 hover:text-blue-400 transition-all"
                       >
                         {label}
                       </button>
@@ -107,10 +100,7 @@ const Documents: React.FC<DocumentsProps> = ({ hasAccess }) => {
           ))}
           {filteredItems.length === 0 && (
             <div className="py-24 text-center glass-premium rounded-[4rem] border-white/5 bg-slate-900/10">
-              <div className="text-slate-700 mb-4 flex justify-center">
-                <svg className="w-12 h-12 opacity-20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" strokeWidth="2" /></svg>
-              </div>
-              <p className="text-slate-500 font-mono text-xs uppercase tracking-widest">No registry matches for "{searchTerm}"</p>
+              <p className="text-slate-500 font-mono text-xs uppercase tracking-widest">No registry matches found.</p>
             </div>
           )}
         </div>

@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Navbar from './components/Navbar.tsx';
 import Hero from './components/Hero.tsx';
 import About from './components/About.tsx';
@@ -8,60 +8,17 @@ import Skills from './components/Skills.tsx';
 import Gallery from './components/Gallery.tsx';
 import Documents from './components/Documents.tsx';
 import Contact from './components/Contact.tsx';
-import Account from './components/Account.tsx';
-import AdminPanel from './components/AdminPanel.tsx';
 import CustomCursor from './components/CustomCursor.tsx';
-import { supabase } from './lib/supabase.ts';
 import { USER_INFO } from './constants.tsx';
-import { UserProfile, PageId } from './types.ts';
+import { PageId } from './types.ts';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<PageId>('home');
-  const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
-
-  useEffect(() => {
-    // 1. Check current session on mount
-    const checkUser = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-        if (profile) setUserProfile(profile);
-      }
-    };
-    checkUser();
-
-    // 2. Listen for auth state changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (session?.user) {
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', session.user.id)
-          .single();
-        setUserProfile(profile);
-      } else {
-        setUserProfile(null);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const hasAccess = (resourceId: string, visibility: 'public' | 'private') => {
-    if (visibility === 'public') return true;
-    if (!userProfile) return false;
-    if (userProfile.role === 'admin') return true;
-    return userProfile.granted_resources.includes(resourceId) || userProfile.granted_resources.includes('*');
-  };
 
   const renderPage = () => {
     switch (activePage) {
       case 'home':
-        return <Hero isAdmin={userProfile?.role === 'admin'} onAdminClick={() => setActivePage('account')} />;
+        return <Hero />;
       case 'about':
         return <About />;
       case 'projects':
@@ -69,22 +26,20 @@ const App: React.FC = () => {
       case 'skills':
         return <Skills />;
       case 'gallery':
-        return <Gallery hasAccess={hasAccess} />;
+        return <Gallery />;
       case 'documents':
-        return <Documents hasAccess={hasAccess} />;
+        return <Documents />;
       case 'contact':
         return <Contact />;
-      case 'account':
-        return <Account onAuthChange={setUserProfile} currentProfile={userProfile} />;
       default:
-        return <Hero isAdmin={userProfile?.role === 'admin'} onAdminClick={() => setActivePage('account')} />;
+        return <Hero />;
     }
   };
 
   return (
     <div className="relative min-h-screen bg-[#030712] text-slate-200 selection:bg-blue-500/30 flex flex-col">
       <CustomCursor />
-      <Navbar activePage={activePage} onNavigate={setActivePage} isAuth={!!userProfile} userProfile={userProfile} />
+      <Navbar activePage={activePage} onNavigate={setActivePage} />
       
       <main className="flex-grow animate-in fade-in duration-700">
         <div id="home"></div>

@@ -1,25 +1,21 @@
+
 import React, { useState, useMemo } from 'react';
 import { GALLERY_ITEMS } from '../constants.tsx';
 import { GalleryItem } from '../types.ts';
 
-interface GalleryProps {
-  hasAccess: (id: string, visibility: 'public' | 'private') => boolean;
-}
-
-const Gallery: React.FC<GalleryProps> = ({ hasAccess }) => {
+const Gallery: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState<'All' | 'Official' | 'Unofficial'>('All');
   const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
 
   const filteredItems = useMemo(() => {
     return GALLERY_ITEMS.filter(item => {
-      if (!hasAccess(item.id, item.visibility)) return false;
       const matchesFilter = activeFilter === 'All' || item.label === activeFilter;
       const searchStr = `${item.title} ${item.description} ${item.dateTime} ${item.label}`.toLowerCase();
       const matchesSearch = searchStr.includes(searchTerm.toLowerCase());
       return matchesFilter && matchesSearch;
     });
-  }, [searchTerm, activeFilter, hasAccess]);
+  }, [searchTerm, activeFilter]);
 
   const handleDownload = (imageUrl: string, title: string) => {
     const link = document.createElement('a');
@@ -41,7 +37,6 @@ const Gallery: React.FC<GalleryProps> = ({ hasAccess }) => {
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4">
-            {/* Short Query Filter Labels */}
             <div className="flex bg-slate-900/50 p-1.5 rounded-2xl border border-white/5 h-fit">
               {(['All', 'Official', 'Unofficial'] as const).map((label) => (
                 <button
@@ -60,7 +55,7 @@ const Gallery: React.FC<GalleryProps> = ({ hasAccess }) => {
             
             <input 
               type="text" 
-              placeholder="Search by ID, Title, or Label..."
+              placeholder="Search assets..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="bg-slate-900 border border-white/10 rounded-2xl px-6 py-3.5 text-xs text-white focus:outline-none focus:border-blue-500/50 w-full sm:w-64 shadow-xl"
@@ -119,10 +114,6 @@ const Gallery: React.FC<GalleryProps> = ({ hasAccess }) => {
                   <div className="flex-1 p-5 bg-slate-900/50 rounded-2xl border border-white/5 font-mono">
                     <p className="text-[8px] text-slate-600 mb-1 uppercase tracking-widest">Object ID</p>
                     <p className="text-xs text-blue-400 font-bold">{selectedImage.id}</p>
-                  </div>
-                  <div className="flex-1 p-5 bg-slate-900/50 rounded-2xl border border-white/5 font-mono">
-                    <p className="text-[8px] text-slate-600 mb-1 uppercase tracking-widest">Visibility</p>
-                    <p className="text-xs text-white font-bold uppercase">{selectedImage.visibility}</p>
                   </div>
                 </div>
               </div>
