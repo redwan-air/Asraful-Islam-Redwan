@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { supabase } from '../lib/supabase.ts';
 import { UserProfile } from '../types.ts';
 import AdminPanel from './AdminPanel.tsx';
@@ -14,7 +14,6 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const [loginId, setLoginId] = useState(''); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -26,35 +25,15 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
 
     try {
       if (isLogin) {
-        // --- MASTER ADMIN BYPASS ---
-        // admin@air.com / air.key/admin
-        if (loginId.toLowerCase() === 'admin@air.com' && password === 'air.key/admin') {
-          console.log("Admin Bypass Triggered Successfully");
-          const adminProfile: UserProfile = {
-            id: 'admin-uuid',
-            full_name: 'Asraful Islam Redwan',
-            custom_id: '1001',
-            email: 'admin@air.com',
-            access_key: 'MASTER_KEY',
-            role: 'admin',
-            granted_resources: ['*'],
-            avatar_url: 'https://i.postimg.cc/HkYKGYnb/logo.png'
-          };
-          onAuthChange(adminProfile);
-          localStorage.setItem('redwan_auth', JSON.stringify(adminProfile));
-          setLoading(false);
-          return;
-        }
-
-        // Standard Supabase Logic
-        let authEmail = loginId;
+        // Strict Supabase Login
         const { data, error: authError } = await supabase.auth.signInWithPassword({
-          email: authEmail, 
+          email, 
           password,
         });
 
         if (authError) throw authError;
-        
+
+        // Fetch profile created by DB trigger
         const { data: profileData, error: profileError } = await supabase
           .from('profiles')
           .select('*')
@@ -62,37 +41,32 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
           .single();
         
         if (profileError) throw profileError;
-          
-        const finalProfile = { ...profileData, email: data.user?.email };
-        onAuthChange(finalProfile);
-        localStorage.setItem('redwan_auth', JSON.stringify(finalProfile));
+        onAuthChange(profileData);
 
       } else {
+        // Signup with metadata for the DB trigger
         const { data, error: authError } = await supabase.auth.signUp({
           email,
           password,
+          options: {
+            data: {
+              full_name: fullName,
+            }
+          }
         });
         
         if (authError) throw authError;
-        if (!data.user) throw new Error("Verification required.");
-
-        const accessKey = `AIR-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
-        const newProfile = {
-          id: data.user.id,
-          full_name: fullName,
-          custom_id: (Math.floor(Math.random() * 9000) + 2000).toString(),
-          access_key: accessKey,
-          role: 'user' as const,
-          granted_resources: [],
-          avatar_url: `https://ui-avatars.com/api/?name=${encodeURIComponent(fullName)}&background=3b82f6&color=fff`
-        };
-
-        const { error: profileUpsertError } = await supabase.from('profiles').upsert([newProfile]);
-        if (profileUpsertError) throw profileUpsertError;
-        
-        const finalProfile = { ...newProfile, email: data.user.email! };
-        onAuthChange(finalProfile);
-        localStorage.setItem('redwan_auth', JSON.stringify(finalProfile));
+        if (data.user && data.session === null) {
+          setError("Check your email for the confirmation link!");
+        } else if (data.user) {
+          // Trigger will have created the profile by now
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', data.user.id)
+            .single();
+          onAuthChange(profileData);
+        }
       }
     } catch (err: any) {
       setError(err.message);
@@ -101,10 +75,9 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
     }
   };
 
-  const logout = () => {
-    supabase.auth.signOut();
+  const logout = async () => {
+    await supabase.auth.signOut();
     onAuthChange(null);
-    localStorage.removeItem('redwan_auth');
   };
 
   if (currentProfile) {
@@ -157,7 +130,7 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
   return (
     <section className="min-h-screen pt-40 flex flex-col items-center px-6 pb-20">
       <div className="w-full max-w-md glass-premium p-10 rounded-[3rem] shadow-2xl border-white/10">
-        <h2 className="text-3xl font-black text-white mb-6 tracking-tight">Access Portal.</h2>
+        <h2 className="text-3xl font-black text-white mb-6 tracking-tight">{isLogin ? 'Access Portal.' : 'Identity Registry.'}</h2>
         {error && <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-500 text-[10px] font-mono">ERROR: {error}</div>}
         <form onSubmit={handleAuth} className="space-y-4">
           {!isLogin && (
@@ -167,8 +140,8 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
             </div>
           )}
           <div>
-            <label className="text-[10px] font-mono text-slate-500 mb-2 block uppercase tracking-widest">{isLogin ? 'Username / ID' : 'Email Address'}</label>
-            <input type="text" value={isLogin ? loginId : email} onChange={(e) => isLogin ? setLoginId(e.target.value) : setEmail(e.target.value)} className="w-full bg-slate-900 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500" required />
+            <label className="text-[10px] font-mono text-slate-500 mb-2 block uppercase tracking-widest">Email Address</label>
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-slate-900 border border-white/10 rounded-xl px-5 py-4 text-white focus:outline-none focus:border-blue-500" required />
           </div>
           <div className="relative">
             <label className="text-[10px] font-mono text-slate-500 mb-2 block uppercase tracking-widest">Password</label>
@@ -192,7 +165,7 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
             </button>
           </div>
           <button type="submit" disabled={loading} className="w-full py-5 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-blue-500 transition-all disabled:opacity-50 mt-4">
-            {loading ? 'PROCESSING...' : (isLogin ? 'AUTHORIZE' : 'GENERATE ID')}
+            {loading ? 'PROCESSING...' : (isLogin ? 'AUTHORIZE' : 'CREATE ACCOUNT')}
           </button>
         </form>
         <button onClick={() => setIsLogin(!isLogin)} className="w-full mt-6 text-[10px] font-mono text-slate-500 hover:text-white uppercase tracking-widest">

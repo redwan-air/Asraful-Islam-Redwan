@@ -11,6 +11,7 @@ import Contact from './components/Contact.tsx';
 import Account from './components/Account.tsx';
 import AdminPanel from './components/AdminPanel.tsx';
 import CustomCursor from './components/CustomCursor.tsx';
+import { supabase } from './lib/supabase.ts';
 import { USER_INFO } from './constants.tsx';
 import { UserProfile, PageId } from './types.ts';
 
@@ -19,24 +20,35 @@ const App: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
 
   useEffect(() => {
-    const saved = localStorage.getItem('redwan_auth');
-    if (saved) {
-      try {
-        setUserProfile(JSON.parse(saved));
-      } catch (e) {
-        console.error("Auth Restore Fail", e);
+    // 1. Check current session on mount
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session?.user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single();
+        if (profile) setUserProfile(profile);
       }
-    }
-
-    // Navigation Listener (Simplified since AI is removed)
-    const handleNav = (e: any) => {
-      const targetPage = e.detail as PageId;
-      setActivePage(targetPage);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     };
+    checkUser();
 
-    window.addEventListener('navTo', handleNav);
-    return () => window.removeEventListener('navTo', handleNav);
+    // 2. Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session?.user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', session.user.id)
+          .single();
+        setUserProfile(profile);
+      } else {
+        setUserProfile(null);
+      }
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const hasAccess = (resourceId: string, visibility: 'public' | 'private') => {
@@ -57,27 +69,9 @@ const App: React.FC = () => {
       case 'skills':
         return <Skills />;
       case 'gallery':
-        return (
-          <div id="gallery">
-            {userProfile?.role === 'admin' && (
-              <div className="max-w-7xl mx-auto pt-40 px-6 -mb-20">
-                <AdminPanel />
-              </div>
-            )}
-            <Gallery hasAccess={hasAccess} />
-          </div>
-        );
+        return <Gallery hasAccess={hasAccess} />;
       case 'documents':
-        return (
-          <div id="documents">
-            {userProfile?.role === 'admin' && (
-              <div className="max-w-7xl mx-auto pt-40 px-6 -mb-20">
-                <AdminPanel />
-              </div>
-            )}
-            <Documents hasAccess={hasAccess} />
-          </div>
-        );
+        return <Documents hasAccess={hasAccess} />;
       case 'contact':
         return <Contact />;
       case 'account':
