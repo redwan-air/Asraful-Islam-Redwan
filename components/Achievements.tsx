@@ -6,6 +6,7 @@ interface Achievement {
   id: string;
   title: string;
   thumbnail: string;
+  date: string;
   description: string;
   images: string[];
 }
@@ -15,7 +16,8 @@ const achievementsData: Achievement[] = [
     id: 'nhspc-2026',
     title: 'First Contest Medal : NHSPC',
     thumbnail: 'https://i.postimg.cc/52ZZ7ZJD/NHSPC-26.png',
-    description: "Participating in the National High School Programming Contest (NHSPC) 2026 Regional Round was a turning point in my programming journey, as it was my first-ever programming contest where I achieved a Regional Medal by solving two problems. Beyond the achievement itself, the experience allowed me to truly understand and enjoy the essence of competitive programming. I went through the full cycle of problem-solving—encountering repeated errors, debugging my code multiple times, rethinking my approach after failures, and persistently trying until I found the correct solution. The moment I saw “Accepted” after several attempts brought a deep sense of satisfaction and accomplishment, reinforcing my interest in this field. This contest helped me develop key skills such as logical thinking, debugging under pressure, and resilience, while also shifting my mindset from simply writing code to genuinely enjoying the process of solving problems. To make the experience even more memorable, I celebrated each solved problem by attaching a balloon to my desk, turning progress into a visual and motivating reward system. Overall, this achievement not only marked the beginning of my competitive programming journey but also ignited a lasting passion for tackling challenges and continuously improving myself.",
+    date: 'June 10, 2026',
+    description: "Participating in the National High School Programming Contest (NHSPC) 2026 Regional Round was a turning point in my programming journey, as it was my first-ever programming contest where I achieved a Regional Medal by solving two problems. NHSPC is widely recognized as one of the most prestigious programming contests in the region, serving as a vital platform for young programmers to showcase and refine their algorithmic problem-solving skills.\n\nBeyond the achievement itself, the experience allowed me to truly understand and enjoy the essence of competitive programming. I went through the full cycle of problem-solving—encountering repeated errors, debugging my code multiple times, rethinking my approach after failures, and persistently trying until I found the correct solution. The moment I saw “Accepted” after several attempts brought a deep sense of satisfaction and accomplishment, reinforcing my interest in this field. This contest helped me develop key skills such as logical thinking, debugging under pressure, and resilience, while also shifting my mindset from simply writing code to genuinely enjoying the process of solving problems. To make the experience even more memorable, I celebrated each solved problem by attaching a balloon to my desk, turning progress into a visual and motivating reward system. Overall, this achievement not only marked the beginning of my competitive programming journey but also ignited a lasting passion for tackling challenges and continuously improving myself.",
     images: [
       "https://i.postimg.cc/BntYGNNn/702190400-122243363864047337-4649943769379417913-n.jpg",
       "https://i.postimg.cc/G3Qq8652/700252926-122243363918047337-5207860341879541138-n.jpg",
@@ -40,7 +42,8 @@ const Achievements: React.FC = () => {
         >
           <ChevronLeft className="w-5 h-5 mr-2" /> Back to Achievements
         </button>
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-12 tracking-tight">{selectedAchievement.title}</h1>
+        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">{selectedAchievement.title}</h1>
+        <p className="text-slate-500 font-mono text-sm mb-12">{selectedAchievement.date}</p>
         
         <div className="prose prose-invert prose-lg max-w-none">
           {selectedAchievement.description.split('\n\n').map((paragraph, index) => (
@@ -50,7 +53,7 @@ const Achievements: React.FC = () => {
                 <img 
                   src={selectedAchievement.images[index]} 
                   alt={`Achievement context ${index}`} 
-                  className="rounded-2xl shadow-xl my-8 w-full"
+                  className="rounded-2xl shadow-2xl my-8 mx-auto w-full max-w-lg aspect-video object-cover border border-white/5"
                   referrerPolicy="no-referrer"
                 />
               )}
