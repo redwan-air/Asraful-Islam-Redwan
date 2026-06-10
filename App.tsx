@@ -7,6 +7,7 @@ import Projects from './components/Projects.tsx';
 import Skills from './components/Skills.tsx';
 import Gallery from './components/Gallery.tsx';
 import Documents from './components/Documents.tsx';
+import Achievements from './components/Achievements.tsx';
 import Contact from './components/Contact.tsx';
 import CustomCursor from './components/CustomCursor.tsx';
 import { USER_INFO } from './constants.tsx';
@@ -29,6 +30,8 @@ const App: React.FC = () => {
         return <Gallery />;
       case 'documents':
         return <Documents />;
+      case 'achievements':
+        return <Achievements />;
       case 'contact':
         return <Contact />;
       default:
@@ -46,6 +49,7 @@ const App: React.FC = () => {
         <div id="about"></div>
         <div id="projects"></div>
         <div id="skills"></div>
+        <div id="achievements"></div>
         <div id="contact"></div>
         {renderPage()}
       </main>

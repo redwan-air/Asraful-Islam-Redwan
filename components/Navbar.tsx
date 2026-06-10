@@ -26,6 +26,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
     { name: 'Tech', id: 'skills' },
     { name: 'Gallery', id: 'gallery' },
     { name: 'Docs', id: 'documents' },
+    { name: 'Achievements', id: 'achievements' },
     { name: 'Connect', id: 'contact' },
   ];
 
@@ -37,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-4 w-full max-w-max">
-      <div className={`glass-premium px-8 py-4 rounded-full flex items-center gap-6 shadow-2xl border-white/10 group/nav transition-all duration-500 ${isGlowing ? 'animate-rainbow-glow border-opacity-100 scale-105' : 'border-opacity-10'}`}>
+      <div className={`bg-slate-950 px-8 py-4 rounded-full flex items-center gap-6 shadow-2xl border border-white/10 group/nav transition-all duration-500 ${isGlowing ? 'animate-rainbow-glow border-opacity-100 scale-105' : 'border-opacity-10'}`}>
         <button 
           onClick={(e) => handleLinkClick(e, 'home')} 
           className="flex items-center group/logo focus:outline-none relative"
