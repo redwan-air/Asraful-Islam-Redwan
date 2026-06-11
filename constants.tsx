@@ -1,22 +1,7 @@
 
 import { Project, Skill, GalleryItem, DocumentItem } from './types';
 
-export const PROJECTS: Project[] = [
-  {
-    id: '1',
-    title: 'AlgoFlow Visualizer',
-    description: 'A high-performance algorithm simulation engine. Visualizes dynamic programming transitions and complex graph traversals with sub-millisecond precision.',
-    tags: ['C++', 'Algorithms', 'Logic'],
-    imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    id: '2',
-    title: 'Codeforces Analytics',
-    description: 'A tool for competitive programmers to analyze their rating trajectories and problem difficulty distribution using optimized data processing.',
-    tags: ['C++', 'Data Structures'],
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bbbda536639a?auto=format&fit=crop&w=800&q=80'
-  }
-];
+export const PROJECTS: Project[] = [];
 
 export const SKILLS: Skill[] = [
   { name: 'C++', icon: '🚀', category: 'backend' },
