@@ -36,6 +36,7 @@ const Contact: React.FC = () => {
         <div className="flex justify-center gap-12 pt-12">
           <a href={USER_INFO.github} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors uppercase font-mono text-xs tracking-widest">GitHub</a>
           <a href={USER_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors uppercase font-mono text-xs tracking-widest">LinkedIn</a>
+          <a href={`https://codeforces.com/profile/${USER_INFO.codeforces}`} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-white transition-colors uppercase font-mono text-xs tracking-widest">Codeforces</a>
         </div>
       </div>
     </section>

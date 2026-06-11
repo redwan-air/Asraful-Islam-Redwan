@@ -58,7 +58,7 @@ export const USER_INFO = {
   about: 'Driven by logic and efficiency. Specializing in high-performance C++ systems and algorithmic optimization. Current mission: Mastering intermediate academic challenges while competing on a global stage.',
   education: 'Govt. Madan Mohan College | 2025-NOW',
   cpStats: {
-    codeforces: 'Newbie',
+    codeforces: '386',
     leetCode: 'Contestant',
     problemsSolved: 'Developing...',
     rating: '0'
@@ -68,5 +68,6 @@ export const USER_INFO = {
   whatsapp: '01345156553',
   github: 'https://github.com/redwan',
   linkedin: 'https://linkedin.com/in/redwan',
+  codeforces: 'redwan.code',
   version: '2.5.0'
 };
