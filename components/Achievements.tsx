@@ -124,6 +124,93 @@ const Achievements: React.FC = () => {
   const [selectedAchievement, setSelectedAchievement] = useState<Achievement | null>(null);
 
   if (selectedAchievement) {
+    if (selectedAchievement.id === 'developeair-journey') {
+      return (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-[800px] mx-auto px-6 pt-32 pb-24"
+        >
+          <button
+            onClick={() => setSelectedAchievement(null)}
+            className="flex items-center text-slate-400 hover:text-white mb-12 transition-colors font-mono text-sm uppercase tracking-widest"
+          >
+            <ChevronLeft className="w-5 h-5 mr-2" /> Back to Achievements
+          </button>
+
+          {/* Premium Hero Header */}
+          <div className="mb-16 border-b border-white/10 pb-12">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center">
+                <span className="text-2xl">🚀</span>
+              </div>
+              <span className="text-blue-400 font-mono text-sm tracking-widest uppercase">Company Journal</span>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tight">THE JOURNEY OF DEVELOPEAIR</h1>
+            <p className="text-slate-400 text-lg mb-6 italic">"The beginning of a long-term technology journey."</p>
+            <div className="flex items-center gap-6 text-slate-500 font-mono text-sm">
+              <span className="flex items-center gap-2">📅 {selectedAchievement.date}</span>
+              <span className="w-px h-4 bg-slate-700"></span>
+              <span>By Asraful Islam Redwan</span>
+            </div>
+          </div>
+
+          <div className="prose prose-invert prose-lg max-w-none space-y-8 text-slate-300 leading-relaxed">
+            <p>Developeair is a technology company built around one simple idea: <strong>technology should make ambitious ideas possible.</strong></p>
+            
+            <p>The idea of Developeair began with a personal ambition to build something meaningful in technology—not just as a single project, but as a long-term company capable of creating innovative products and solving real-world problems.</p>
+
+            <h2 className="text-2xl font-bold text-white mt-12 mb-4">The Beginning</h2>
+            <div className="p-6 bg-blue-900/10 border-l-4 border-blue-500 rounded-r-2xl mb-8">
+              <p className="text-lg font-medium text-blue-100">I planned to start Developeair on October 6, 2025—a date that holds special meaning to me because it was also my birthday.</p>
+            </div>
+            <p>For me, the date represents more than the beginning of a company. It represents the beginning of a long-term journey in technology and entrepreneurship.</p>
+            
+            <h2 className="text-2xl font-bold text-white mt-12 mb-4">Our Vision</h2>
+            <p>The vision of Developeair is to become a globally recognized technology company that builds products capable of making a real difference in people's everyday lives and professional work. We believe the future of technology will not be defined by a single application or platform, but by interconnected products and intelligent systems.</p>
+
+            <h2 className="text-2xl font-bold text-white mt-12 mb-4">What We Build</h2>
+            <p>Our areas of interest include:</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-8">
+              {['Artificial Intelligence', 'Software & SaaS', 'Developer Tools', 'Productivity', 'Education Technology', 'Digital Platforms', 'Research & Data', 'Future-focused Technology'].map(item => (
+                <div key={item} className="p-4 bg-white/5 rounded-xl border border-white/5 flex items-center gap-3 text-sm font-medium text-white hover:border-blue-500/50 transition-colors">
+                  <div className="w-2 h-2 rounded-full bg-blue-500"></div> {item}
+                </div>
+              ))}
+            </div>
+
+            <h2 className="text-2xl font-bold text-white mt-12 mb-4">Our Approach</h2>
+            <div className="space-y-4">
+              {[
+                { title: 'Build with purpose', desc: 'Technology should solve a real problem or create meaningful value.' },
+                { title: 'Think long-term', desc: 'Building products that can grow for years.' },
+                { title: 'Keep learning', desc: 'Continuous learning and experimentation.' },
+                { title: 'Design for scale', desc: 'Building with global reach in mind.' },
+                { title: 'Put users first', desc: 'Success depends on genuinely helping users.' }
+              ].map(item => (
+                <div key={item.title} className="flex gap-4 p-4 hover:bg-white/5 rounded-xl transition-colors">
+                  <div className="text-blue-500 font-bold text-lg mt-1">✓</div>
+                  <div>
+                    <h4 className="font-bold text-white">{item.title}</h4>
+                    <p className="text-slate-400">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          <div className="mt-20 pt-12 border-t border-white/10 text-center">
+            <button 
+              onClick={() => setSelectedAchievement(null)}
+              className="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-blue-400 transition-colors"
+            >
+              Back to Achievements
+            </button>
+          </div>
+        </motion.div>
+      );
+    }
+
     return (
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
