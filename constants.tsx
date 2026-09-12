@@ -5,6 +5,8 @@ export const PROJECTS: Project[] = [];
 
 export const SKILLS: Skill[] = [
   { name: 'C++', icon: '🚀', category: 'backend' },
+  { name: 'Python', icon: '🐍', category: 'backend' },
+  { name: 'Go', icon: '🐹', category: 'backend' },
   { name: 'Algorithms', icon: '🧠', category: 'other' },
   { name: 'Graph Theory', icon: '🕸️', category: 'other' },
   { name: 'Problem Solving', icon: '🧩', category: 'other' },

@@ -27,7 +27,7 @@ const About: React.FC = () => {
               </div>
               <div className="group cursor-default">
                 <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">Expertise</p>
-                <p className="text-sm text-white font-bold group-hover:text-blue-400 transition-colors">C++ Only</p>
+                <p className="text-sm text-white font-bold group-hover:text-blue-400 transition-colors">C++, Python, Go</p>
               </div>
             </div>
           </div>
