@@ -15,7 +15,7 @@ const achievementsData: Achievement[] = [
   {
     id: 'developeair-journey',
     title: 'THE JOURNEY OF DEVELOPEAIR',
-    thumbnail: 'developeairart.png',
+    thumbnail: 'https://i.postimg.cc/VNTX1Ntt/image.png',
     date: 'October 6, 2025',
     description: `Developeair
 
