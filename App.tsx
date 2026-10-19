@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.tsx';
 import Hero from './components/Hero.tsx';
 import About from './components/About.tsx';
@@ -10,11 +10,20 @@ import Documents from './components/Documents.tsx';
 import Achievements from './components/Achievements.tsx';
 import Contact from './components/Contact.tsx';
 import CustomCursor from './components/CustomCursor.tsx';
-import { USER_INFO } from './constants.tsx';
+import { USER_INFO, METADATA_CONFIG } from './constants.tsx';
 import { PageId } from './types.ts';
 
 const App: React.FC = () => {
   const [activePage, setActivePage] = useState<PageId>('home');
+
+  useEffect(() => {
+    const meta = METADATA_CONFIG[activePage] || METADATA_CONFIG.home;
+    document.title = meta.title;
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', meta.description);
+    }
+  }, [activePage]);
 
   const renderPage = () => {
     switch (activePage) {

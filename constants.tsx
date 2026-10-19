@@ -58,3 +58,14 @@ export const USER_INFO = {
   codeforces: 'redwan.code',
   version: '2.5.0'
 };
+
+export const METADATA_CONFIG = {
+  home: { title: 'Asraful Islam Redwan | Competitive Programmer', description: 'Personal website of Asraful Islam Redwan, a competitive programmer and coder.' },
+  about: { title: 'About Asraful Islam Redwan', description: 'Learn more about Asraful Islam Redwan, his journey, and his passion for coding.' },
+  projects: { title: 'Projects | Asraful Islam Redwan', description: 'Explore the projects built by Asraful Islam Redwan, including tools and technology experiments.' },
+  skills: { title: 'Skills | Asraful Islam Redwan', description: 'Technical skills of Asraful Islam Redwan, including C++, Python, and more.' },
+  gallery: { title: 'Gallery | Asraful Islam Redwan', description: 'Gallery showcasing visual assets and projects of Asraful Islam Redwan.' },
+  documents: { title: 'Documents | Asraful Islam Redwan', description: 'Documents and resources shared by Asraful Islam Redwan.' },
+  articles: { title: 'Articles | Asraful Islam Redwan', description: 'Read articles and insights by Asraful Islam Redwan, including "Journey Of Unfoundid".' },
+  contact: { title: 'Contact | Asraful Islam Redwan', description: 'Get in touch with Asraful Islam Redwan.' }
+};

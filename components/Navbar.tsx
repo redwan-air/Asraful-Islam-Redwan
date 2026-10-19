@@ -44,7 +44,7 @@ const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
           className="flex items-center group/logo focus:outline-none relative"
         >
           <img 
-            src="https://i.postimg.cc/HkYKGYnb/logo.png" 
+            src="/logo.png" 
             alt="Logo" 
             className={`h-7 w-auto transition-all group-hover/logo:scale-110 ${activePage === 'home' ? 'brightness-200' : 'brightness-125 grayscale'}`} 
           />
