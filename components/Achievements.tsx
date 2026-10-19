@@ -117,6 +117,14 @@ A date. A beginning. A long-term vision.`,
       "https://i.postimg.cc/G3Qq8652/700252926-122243363918047337-5207860341879541138-n.jpg",
       "https://i.postimg.cc/G3Qq8652/700252926-122243363918047337-5207860341879541138-n.jpg"
     ]
+  },
+  {
+    id: 'unfoundid-journey',
+    title: 'Journey Of Unfoundid',
+    thumbnail: 'https://i.postimg.cc/QC1VGwZM/image.png',
+    date: 'October 6, 2026',
+    description: "Introducing Unfoundid — A New Beginning\n\nToday, I’m introducing something new.\n\nUnfoundid.\n\nUnfoundid is a technology brand built around a simple idea: build useful things that solve real problems.\n\nRather than building products simply because they can be built, I want Unfoundid to focus on things that people can actually use—tools, products, and systems designed to make something easier, faster, or better.\n\nThe first phase of Unfoundid will focus on building a collection of free, genuinely useful products and tools.\n\nThese products will be available for anyone to use. The goal is simple: remove unnecessary barriers and make useful technology accessible to more people.\n\nOver time, I want Unfoundid to grow beyond individual tools into a broader technology ecosystem.\n\nThere will be experiments. There will be products that evolve. Some ideas will work, and some won't. But every project will be built with the same principle:\n\nIf we build it, it should be worth using.\n\nUnfoundid is also the beginning of a new chapter for me as a builder.\n\nI’m not launching it with the expectation that everything will be perfect from day one. I’m launching it to start building, learning, improving, and gradually turning ideas into products that people genuinely find useful.\n\nThe name itself has a small story behind it.\n\nWhile searching for the right name, I couldn't find one that felt right.\n\nSo I decided to call it Unfoundid.\n\nNow, instead of searching for what doesn't exist, I want to start building it.\n\nWelcome to Unfoundid.\n\nThis is only the beginning.\n\n— Asraful Islam Redwan\nFounder",
+    images: []
   }
 ];
 
@@ -135,7 +143,7 @@ const Achievements: React.FC = () => {
             onClick={() => setSelectedAchievement(null)}
             className="flex items-center text-slate-400 hover:text-white mb-12 transition-colors font-mono text-sm uppercase tracking-widest"
           >
-            <ChevronLeft className="w-5 h-5 mr-2" /> Back to Achievements
+            <ChevronLeft className="w-5 h-5 mr-2" /> Back to Articles
           </button>
 
           {/* Premium Hero Header */}
@@ -204,7 +212,7 @@ const Achievements: React.FC = () => {
               onClick={() => setSelectedAchievement(null)}
               className="px-8 py-3 bg-white text-black font-bold rounded-full hover:bg-blue-400 transition-colors"
             >
-              Back to Achievements
+              Back to Articles
             </button>
           </div>
         </motion.div>
@@ -221,7 +229,7 @@ const Achievements: React.FC = () => {
           onClick={() => setSelectedAchievement(null)}
           className="flex items-center text-slate-400 hover:text-white mb-8 transition-colors"
         >
-          <ChevronLeft className="w-5 h-5 mr-2" /> Back to Achievements
+          <ChevronLeft className="w-5 h-5 mr-2" /> Back to Articles
         </button>
         <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 tracking-tight">{selectedAchievement.title}</h1>
         <p className="text-slate-500 font-mono text-sm mb-12">{selectedAchievement.date}</p>
@@ -247,7 +255,7 @@ const Achievements: React.FC = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-6 pt-32 pb-24">
-      <h1 className="text-4xl md:text-5xl font-bold text-white mb-16 tracking-tight">Achievements</h1>
+      <h1 className="text-4xl md:text-5xl font-bold text-white mb-16 tracking-tight">Articles</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {achievementsData.map((achievement) => (
           <motion.button
