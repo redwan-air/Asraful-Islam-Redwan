@@ -1,67 +1,91 @@
-import React from 'react';
-import { USER_INFO } from '../constants.tsx';
+import React, { useEffect } from 'react';
 
 const About: React.FC = () => {
+  useEffect(() => {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Asraful Islam Redwan",
+        "jobTitle": "Programmer & Independent Builder",
+        "description": "Programmer and independent builder exploring software development, technology, and digital products.",
+        "url": "https://air-redwan.cyou/about"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.innerHTML = JSON.stringify(schema);
+    document.head.appendChild(script);
+
+    return () => {
+      document.head.removeChild(script);
+    };
+  }, []);
+
   return (
     <section className="min-h-screen pt-32 pb-32 relative overflow-hidden">
-      <div className="max-w-5xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row gap-16 items-start">
+      <div className="max-w-4xl mx-auto px-6">
+        <div className="space-y-16">
           
-          {/* Left Sidebar Info */}
-          <div className="md:w-1/3 space-y-12 sticky top-32">
-            <div>
-              <span className="text-blue-500 font-mono text-xs uppercase tracking-[0.3em] mb-4 block">/ Profile</span>
-              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter leading-none mb-6">Asraful Islam Redwan.</h2>
-              <div className="h-1 w-12 bg-blue-600 mb-8"></div>
-              <p className="text-slate-400 leading-relaxed font-medium">
-                Passionate student and competitive programmer focused on mastering complex algorithms and low-level optimization using C++.
-              </p>
-            </div>
+          {/* Header */}
+          <div className="space-y-4">
+            <h1 className="text-5xl md:text-6xl font-black text-white tracking-tighter">Asraful Islam Redwan</h1>
+            <p className="text-xl md:text-2xl text-blue-400 font-medium">Programmer & Independent Builder</p>
+            <p className="text-lg text-slate-300 leading-relaxed max-w-2xl">
+              I explore technology by building things. My work revolves around software development, digital products, and solving practical problems through code.
+            </p>
+          </div>
 
-            <div className="space-y-6">
-              <div className="group cursor-default">
-                <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">Education</p>
-                <p className="text-sm text-white font-bold group-hover:text-blue-400 transition-colors">
-                  {USER_INFO.education}
-                </p>
+          {/* Education & Focus */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="p-8 rounded-3xl bg-slate-900/50 border border-white/5">
+              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Education</h3>
+              <p className="text-lg text-white font-semibold">Govt. Madan Mohan College</p>
+              <p className="text-sm text-slate-500">Intermediate Studies · 2025–Present</p>
+            </div>
+            <div className="p-8 rounded-3xl bg-slate-900/50 border border-white/5">
+              <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">Current Focus</h3>
+              <p className="text-lg text-white font-semibold">Software Development</p>
+              <p className="text-sm text-slate-500">Web Technologies · Digital Products</p>
+            </div>
+          </div>
+
+          <hr className="border-white/10" />
+
+          {/* Philosophy */}
+          <div className="space-y-8">
+            <h2 className="text-3xl font-bold text-white tracking-tight">Philosophy</h2>
+            <blockquote className="text-2xl font-light text-blue-200 italic border-l-4 border-blue-500 pl-6 py-2">
+              "Understand the problem. Build the solution. Learn from the result."
+            </blockquote>
+            <p className="text-lg text-slate-300 leading-relaxed">
+              I believe the best way to understand technology is to experiment with it. I document the ideas I explore, the challenges I encounter, the solutions I test, and the products I build along the way.
+            </p>
+            <p className="text-lg text-slate-300 leading-relaxed">
+              My journey is not just about writing code. It is about developing the ability to turn problems into practical solutions.
+            </p>
+          </div>
+
+          {/* Process & Goal */}
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-white">PROCESS</h3>
+              <div className="p-8 rounded-3xl bg-blue-900/10 border border-blue-500/20">
+                <h4 className="text-lg font-bold text-blue-400 mb-2">Build to Learn</h4>
+                <p className="text-slate-300">I learn by experimenting, solving problems, and building real projects.</p>
               </div>
-              <div className="group cursor-default">
-                <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-1">Expertise</p>
-                <p className="text-sm text-white font-bold group-hover:text-blue-400 transition-colors">C++, Python, Go</p>
+            </div>
+            <div className="space-y-4">
+              <h3 className="text-xl font-bold text-white">GOAL</h3>
+              <div className="p-8 rounded-3xl bg-blue-900/10 border border-blue-500/20">
+                <h4 className="text-lg font-bold text-blue-400 mb-2">Long-Term Growth</h4>
+                <p className="text-slate-300">Develop strong engineering fundamentals and build useful technology that creates lasting value.</p>
               </div>
             </div>
           </div>
 
-          {/* Main Narrative */}
-          <div className="md:w-2/3 space-y-12">
-            <div className="glass-premium p-10 md:p-14 rounded-[3rem] relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-8 opacity-5">
-                <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017V14H15.017C13.9124 14 13.017 13.1046 13.017 12V5C13.017 3.89543 13.9124 3 15.017 3H21.017C22.1216 3 23.017 3.89543 23.017 5V12C23.017 13.1046 22.1216 14 21.017 14H21.017V16C21.017 18.7614 18.7784 21 16.017 21H14.017ZM1.017 14H5.017V16C5.017 18.7614 2.77843 21 0.017 21H2.017C3.12157 21 4.017 20.1046 4.017 19V18C4.017 16.8954 3.12157 16 2.017 16H1.017V14H1.017ZM1.017 5C1.017 3.89543 1.91243 3 3.017 3H9.017C10.1216 3 11.017 3.89543 11.017 5V12C11.017 13.1046 10.1216 14 9.017 14H5.017V12C5.017 10.8954 5.91243 10 7.017 10H8.017V8H5.017C3.91243 8 3.017 7.10457 3.017 6V5H1.017V5Z" /></svg>
-              </div>
-              
-              <h3 className="text-3xl font-bold text-white mb-8 tracking-tight group-hover:text-blue-400 transition-colors">Philosophy</h3>
-              <p className="text-xl text-slate-300 leading-relaxed font-light mb-8 italic">
-                "{USER_INFO.about}"
-              </p>
-              <div className="w-full h-[1px] bg-white/5 mb-8"></div>
-              <p className="text-slate-400 leading-relaxed">
-                As a student at Govt. Madan Mohan College, I am dedicating my intermediate studies to the core principles of computer science. Competitive programming is my primary focus, using C++ as the engine to solve intricate puzzles and build a solid foundation for my future in software engineering.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bento-card p-8 rounded-[2rem] hover:bg-blue-600/5 transition-colors">
-                <span className="text-blue-500 font-mono text-[10px] uppercase mb-4 block tracking-widest">Process</span>
-                <h4 className="text-white font-bold mb-2">Algorithm First</h4>
-                <p className="text-sm text-slate-500">I prioritize understanding the mathematical logic before implementation.</p>
-              </div>
-              <div className="bento-card p-8 rounded-[2rem] hover:bg-blue-600/5 transition-colors">
-                <span className="text-blue-500 font-mono text-[10px] uppercase mb-4 block tracking-widest">Goal</span>
-                <h4 className="text-white font-bold mb-2">Intermediate Excellence</h4>
-                <p className="text-sm text-slate-500">Balancing academic studies with intensive coding practice daily.</p>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>

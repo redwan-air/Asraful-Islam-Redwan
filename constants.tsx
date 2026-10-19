@@ -61,7 +61,7 @@ export const USER_INFO = {
 
 export const METADATA_CONFIG = {
   home: { title: 'Asraful Islam Redwan | Competitive Programmer', description: 'Personal website of Asraful Islam Redwan, a competitive programmer and coder.' },
-  about: { title: 'About Asraful Islam Redwan', description: 'Learn more about Asraful Islam Redwan, his journey, and his passion for coding.' },
+  about: { title: 'About Asraful Islam Redwan | Programmer & Builder', description: 'Learn about Asraful Islam Redwan, a programmer and independent builder exploring software development, technology, and digital products.' },
   projects: { title: 'Projects | Asraful Islam Redwan', description: 'Explore the projects built by Asraful Islam Redwan, including tools and technology experiments.' },
   skills: { title: 'Skills | Asraful Islam Redwan', description: 'Technical skills of Asraful Islam Redwan, including C++, Python, and more.' },
   gallery: { title: 'Gallery | Asraful Islam Redwan', description: 'Gallery showcasing visual assets and projects of Asraful Islam Redwan.' },
