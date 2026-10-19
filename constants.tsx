@@ -41,31 +41,64 @@ export const DOCUMENT_ITEMS: DocumentItem[] = [
 export const USER_INFO = {
   name: 'Redwan',
   fullName: 'Asraful Islam Redwan',
-  title: 'Competitive Programmer & Student',
-  about: 'Driven by logic and efficiency. Specializing in high-performance C++ systems and algorithmic optimization. Current mission: Mastering intermediate academic challenges while competing on a global stage.',
-  education: 'Govt. Madan Mohan College | 2025-NOW',
+  title: 'Programmer & Independent Builder',
+  about:
+    'I explore technology by building things. My interests include software development, web technologies, and digital products. I learn through experimentation, solving practical problems, and turning ideas into working solutions.',
+  education: 'Govt. Madan Mohan College | 2025-Present',
   cpStats: {
     codeforces: '386',
     leetCode: 'Contestant',
     problemsSolved: 'Developing...',
     rating: '0'
   },
-  location: 'Sylhet, BD',
+  location: 'Sylhet, Bangladesh',
   email: 'inbox.air01@gmail.com',
   whatsapp: '01345156553',
-  github: 'https://github.com/redwan',
-  linkedin: 'https://linkedin.com/in/redwan',
+  github: 'https://github.com/air-redwan',
+  linkedin: 'https://www.linkedin.com/in/asraful-islam-redwan-076b5742b',
   codeforces: 'redwan.code',
   version: '2.5.0'
 };
 
 export const METADATA_CONFIG = {
-  home: { title: 'Asraful Islam Redwan | Competitive Programmer', description: 'Personal website of Asraful Islam Redwan, a competitive programmer and coder.' },
-  about: { title: 'About Asraful Islam Redwan | Programmer & Builder', description: 'Learn about Asraful Islam Redwan, a programmer and independent builder exploring software development, technology, and digital products.' },
-  projects: { title: 'Projects | Asraful Islam Redwan', description: 'Explore the projects built by Asraful Islam Redwan, including tools and technology experiments.' },
-  skills: { title: 'Skills | Asraful Islam Redwan', description: 'Technical skills of Asraful Islam Redwan, including C++, Python, and more.' },
-  gallery: { title: 'Gallery | Asraful Islam Redwan', description: 'Gallery showcasing visual assets and projects of Asraful Islam Redwan.' },
-  documents: { title: 'Documents | Asraful Islam Redwan', description: 'Documents and resources shared by Asraful Islam Redwan.' },
-  articles: { title: 'Articles | Asraful Islam Redwan', description: 'Read articles and insights by Asraful Islam Redwan, including "Journey Of Unfoundid".' },
-  contact: { title: 'Contact | Asraful Islam Redwan', description: 'Get in touch with Asraful Islam Redwan.' }
+  home: {
+    title: 'Asraful Islam Redwan | Programmer & Builder',
+    description:
+      'Official portfolio of Asraful Islam Redwan, a programmer and independent builder exploring software development, web technologies, and digital products.'
+  },
+  about: {
+    title: 'About Asraful Islam Redwan | Programmer & Builder',
+    description:
+      'Learn about Asraful Islam Redwan, his approach to technology, development journey, and work building digital products.'
+  },
+  projects: {
+    title: 'Projects | Asraful Islam Redwan',
+    description:
+      'Explore software projects and technology experiments by Asraful Islam Redwan.'
+  },
+  skills: {
+    title: 'Technical Skills | Asraful Islam Redwan',
+    description:
+      'Explore the programming languages, technical skills, and problem-solving interests of Asraful Islam Redwan.'
+  },
+  gallery: {
+    title: 'Gallery | Asraful Islam Redwan',
+    description:
+      'Explore selected visual work and official assets of Asraful Islam Redwan.'
+  },
+  documents: {
+    title: 'Documents | Asraful Islam Redwan',
+    description:
+      'Explore publicly available documents and resources by Asraful Islam Redwan.'
+  },
+  achievements: {
+    title: 'Achievements | Asraful Islam Redwan',
+    description:
+      'Explore achievements and milestones of Asraful Islam Redwan.'
+  },
+  contact: {
+    title: 'Contact Asraful Islam Redwan',
+    description:
+      'Contact Asraful Islam Redwan through his official portfolio.'
+  }
 };
