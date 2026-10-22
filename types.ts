@@ -1,6 +1,6 @@
 
 export type Visibility = 'public' | 'private';
-export type PageId = 'home' | 'about' | 'projects' | 'skills' | 'gallery' | 'documents' | 'achievements' | 'contact';
+export type PageId = 'home' | 'about' | 'projects' | 'gallery' | 'documents' | 'achievements' | 'articles' | 'contact';
 
 // Fix: Added missing UserProfile interface used for authentication and account states
 export interface UserProfile {

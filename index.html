@@ -1,36 +1,27 @@
 
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Asraful Islam Redwan | Programmer & Builder</title>
-
-    <meta
-      name="description"
-      content="Official portfolio of Asraful Islam Redwan, a programmer and independent builder exploring software development, web technologies, and digital products."
-    />
-
+    <!-- SEO & Social Meta Tags -->
+    <title>Asraful Islam Redwan | Programmer & Independent Builder</title>
+    <meta name="description" content="Official portfolio of Asraful Islam Redwan, a programmer and independent builder exploring software development, web technologies, and digital products." />
     <link rel="canonical" href="https://air-redwan.cyou/" />
 
+    <!-- OpenGraph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Asraful Islam Redwan" />
-    <meta property="og:title" content="Asraful Islam Redwan | Programmer & Builder" />
-    <meta
-      property="og:description"
-      content="Explore the work, projects, and development journey of Asraful Islam Redwan."
-    />
+    <meta property="og:title" content="Asraful Islam Redwan | Programmer & Independent Builder" />
+    <meta property="og:description" content="Explore the work, projects, and development journey of Asraful Islam Redwan." />
     <meta property="og:url" content="https://air-redwan.cyou/" />
+    <meta property="og:image" content="https://air-redwan.cyou/logo.png" />
 
-    <meta name="twitter:card" content="summary" />
-    <meta
-      name="twitter:title"
-      content="Asraful Islam Redwan | Programmer & Builder"
-    />
-    <meta
-      name="twitter:description"
-      content="Explore the work, projects, and development journey of Asraful Islam Redwan."
-    />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Asraful Islam Redwan | Programmer & Independent Builder" />
+    <meta name="twitter:description" content="Explore the work, projects, and development journey of Asraful Islam Redwan." />
+    <meta name="twitter:image" content="https://air-redwan.cyou/logo.png" />
     
     <link rel="icon" type="image/png" href="/favicon.png" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,12 +30,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
     <script>
-      // API Key injection from user request
+      // API Key injection
       window.process = { env: { API_KEY: "AIzaSyC83TYBfUMTXPI9qhTiFUCzi2rexV0_xuk" } };
     </script>
 
     <script>
       tailwind.config = {
+        darkMode: 'class',
         theme: {
           extend: {
             fontFamily: {
@@ -85,57 +77,69 @@
         color: #f8fafc;
         overflow-x: hidden;
         margin: 0;
-        cursor: none !important; /* Force hide default cursor */
       }
       .glass-premium {
         background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.1);
       }
-      a, button, [role="button"], input {
-        cursor: none !important;
-      }
       ::-webkit-scrollbar { width: 4px; }
       ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
     </style>
     <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
-    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.7",
-    "react": "https://esm.sh/react@19.0.0",
-    "react-dom": "https://esm.sh/react-dom@19.0.0",
-    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
-    "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
-    "react/": "https://esm.sh/react@^19.2.4/"
-  }
-}
-</script>
-  <link rel="stylesheet" href="/index.css">
+    {
+      "imports": {
+        "@google/genai": "https://esm.sh/@google/genai@^1.40.0",
+        "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.39.7",
+        "react": "https://esm.sh/react@19.0.0",
+        "react-dom": "https://esm.sh/react-dom@19.0.0",
+        "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
+        "react-dom/": "https://esm.sh/react-dom@^19.2.4/",
+        "react/": "https://esm.sh/react@^19.2.4/"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="/index.css">
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "ProfilePage",
-  "name": "Asraful Islam Redwan | Official Website",
-  "url": "https://air-redwan.cyou/",
-  "mainEntity": {
-    "@type": "Person",
-    "name": "Asraful Islam Redwan",
-    "url": "https://air-redwan.cyou/",
-    "image": "https://air-redwan.cyou/logo.png",
-    "jobTitle": "Programmer",
-    "description": "Programmer and independent builder exploring software development, web technologies, and digital products.",
-    "sameAs": [
-      "https://github.com/air-redwan",
-      "https://www.linkedin.com/in/asraful-islam-redwan-076b5742b"
-    ]
-  }
-}
-</script>
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://air-redwan.cyou/#person",
+          "name": "Asraful Islam Redwan",
+          "url": "https://air-redwan.cyou/",
+          "image": "https://air-redwan.cyou/logo.png",
+          "jobTitle": "Programmer & Independent Builder",
+          "founderOf": { "@id": "https://air-redwan.cyou/#organization-developeair" },
+          "description": "Programmer and independent builder exploring software development, web technologies, and digital products.",
+          "sameAs": [
+            "https://github.com/air-redwan",
+            "https://www.linkedin.com/in/asraful-islam-redwan-076b5742b"
+          ]
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://air-redwan.cyou/#organization-developeair",
+          "name": "Developeair",
+          "url": "https://air-redwan.cyou/",
+          "description": "Independent builder and software development studio.",
+          "subOrganization": { "@id": "https://air-redwan.cyou/#organization-unfoundid" }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://air-redwan.cyou/#organization-unfoundid",
+          "name": "Unfoundid",
+          "url": "https://air-redwan.cyou/",
+          "description": "Daughter company of Developeair.",
+          "parentOrganization": { "@id": "https://air-redwan.cyou/#organization-developeair" }
+        }
+      ]
+    }
+    </script>
 </head>
   <body>
     <div id="root"></div>
     <script type="module" src="./index.tsx"></script>
-  <script type="module" src="/index.tsx"></script>
 </body>
 </html>

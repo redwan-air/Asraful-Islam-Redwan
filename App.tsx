@@ -1,60 +1,61 @@
 
-import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import Navbar from './components/Navbar.tsx';
-import Hero from './components/Hero.tsx';
-import About from './components/About.tsx';
-import Projects from './components/Projects.tsx';
-import Skills from './components/Skills.tsx';
-import Gallery from './components/Gallery.tsx';
-import Documents from './components/Documents.tsx';
-import Achievements from './components/Achievements.tsx';
-import Contact from './components/Contact.tsx';
-import CustomCursor from './components/CustomCursor.tsx';
-import { USER_INFO, METADATA_CONFIG } from './constants.tsx';
-
-const PageMetadataUpdater: React.FC = () => {
-  const location = useLocation();
-  
-  useEffect(() => {
-    const pageId = location.pathname.substring(1) || 'home';
-    const meta = METADATA_CONFIG[pageId as keyof typeof METADATA_CONFIG] || METADATA_CONFIG.home;
-    document.title = meta.title;
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute('content', meta.description);
-    }
-  }, [location]);
-
-  return null;
-};
+import React from 'react';
+import { motion } from 'framer-motion';
+import Navbar from './components/layout/Navbar.tsx';
+import Hero from './pages/Home.tsx';
+import Projects from './pages/Projects.tsx';
+import Articles from './pages/Articles.tsx';
+import Contact from './pages/Contact.tsx';
+import { USER_INFO } from './constants.tsx';
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <PageMetadataUpdater />
-      <div className="relative min-h-screen bg-[#030712] text-slate-200 selection:bg-blue-500/30 flex flex-col">
-        <CustomCursor />
+      <div className="relative min-h-screen bg-[#030712] text-slate-200 selection:bg-blue-500/30 flex flex-col scroll-smooth">
+
         <Navbar />
         
         <main className="flex-grow animate-in fade-in duration-700">
-          <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/work" element={<Projects />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/documents" element={<Documents />} />
-            <Route path="/achievements" element={<Achievements />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <motion.section 
+            id="home"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1 }}
+          >
+            <Hero />
+          </motion.section>
+          <motion.section 
+            id="projects"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Projects />
+          </motion.section>
+          <motion.section 
+            id="articles"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Articles />
+          </motion.section>
+          <motion.section 
+            id="contact"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8 }}
+          >
+            <Contact />
+          </motion.section>
         </main>
 
         <footer className="py-12 border-t border-white/5 bg-slate-950/50 text-center">
           <div className="max-w-7xl mx-auto px-4">
-            <a href="/" className="mb-6 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all block">
+            <a href="#home" className="mb-6 opacity-30 grayscale hover:grayscale-0 hover:opacity-100 transition-all block">
               <img src="/logo.png" alt="Logo" className="h-6 mx-auto" />
             </a>
             <p className="text-slate-500 text-[10px] font-mono uppercase tracking-[0.2em]">
@@ -68,7 +69,6 @@ const App: React.FC = () => {
           </div>
         </footer>
       </div>
-    </BrowserRouter>
   );
 };
 

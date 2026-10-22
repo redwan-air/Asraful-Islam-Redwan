@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { USER_INFO } from '../constants.tsx';
 
 const About: React.FC = () => {
@@ -82,16 +83,22 @@ const About: React.FC = () => {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div className="bento-card p-8 rounded-[2rem] hover:bg-blue-600/5 transition-colors">
+              <motion.div 
+                whileHover={{ scale: 1.02, backgroundColor: "rgba(37, 99, 235, 0.05)" }}
+                className="bento-card p-8 rounded-[2rem] border border-white/5 transition-colors cursor-default"
+              >
                 <span className="text-blue-500 font-mono text-[10px] uppercase mb-4 block tracking-widest">Process</span>
                 <h4 className="text-white font-bold mb-2">Build to Learn</h4>
                 <p className="text-sm text-slate-500">I learn by experimenting, solving problems, and building real projects.</p>
-              </div>
-              <div className="bento-card p-8 rounded-[2rem] hover:bg-blue-600/5 transition-colors">
+              </motion.div>
+              <motion.div 
+                whileHover={{ scale: 1.02, backgroundColor: "rgba(37, 99, 235, 0.05)" }}
+                className="bento-card p-8 rounded-[2rem] border border-white/5 transition-colors cursor-default"
+              >
                 <span className="text-blue-500 font-mono text-[10px] uppercase mb-4 block tracking-widest">Goal</span>
                 <h4 className="text-white font-bold mb-2">Long-Term Growth</h4>
                 <p className="text-sm text-slate-500">Develop strong engineering fundamentals and build useful technology that creates lasting value.</p>
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
