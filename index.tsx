@@ -16,13 +16,7 @@ if (rootElement) {
     <React.StrictMode>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<App />}>
-            <Route index element={<Navigate to="/home" replace />} />
-            <Route path="home" element={<Hero />} />
-            <Route path="projects" element={<Projects />} />
-            <Route path="articles" element={<Articles />} />
-            <Route path="about" element={<About />} />
-          </Route>
+          <Route path="/*" element={<App />} />
         </Routes>
       </BrowserRouter>
     </React.StrictMode>

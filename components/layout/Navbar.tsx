@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { PageId } from '../../types.ts';
 
 const Navbar: React.FC = () => {
@@ -35,11 +35,9 @@ const Navbar: React.FC = () => {
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-4 w-full max-w-max">
       <div className={`bg-slate-950 px-8 py-4 rounded-full flex items-center gap-6 shadow-2xl border border-white/10 group/nav transition-all duration-500 ${isGlowing ? 'animate-rainbow-glow border-opacity-100 scale-105' : 'border-opacity-10'}`}>
-        <motion.a 
-          href="/home"
+        <Link
+          to="/home"
           className="flex items-center group/logo focus:outline-none relative"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
         >
           <img 
             src="/logo.png" 
@@ -49,24 +47,22 @@ const Navbar: React.FC = () => {
           {activeSection === 'home' && (
             <motion.div layoutId="active-nav" className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full"></motion.div>
           )}
-        </motion.a>
+        </Link>
         
         <div className="flex items-center gap-6">
           {navLinks.map((link) => (
-            <motion.a
+            <Link
               key={link.id}
-              href={link.href}
+              to={link.href}
               className={`relative text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500 focus:outline-none hover:text-white ${
                 activeSection === link.id ? 'text-blue-400' : 'text-slate-500'
               }`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
             >
               {link.name}
               {activeSection === link.id && (
                 <motion.div layoutId="active-nav" className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full"></motion.div>
               )}
-            </motion.a>
+            </Link>
           ))}
         </div>
       </div>
