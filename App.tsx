@@ -5,7 +5,7 @@ import Navbar from './components/layout/Navbar.tsx';
 import Hero from './pages/Home.tsx';
 import Projects from './pages/Projects.tsx';
 import Articles from './pages/Articles.tsx';
-import Contact from './pages/Contact.tsx';
+import About from './pages/About.tsx';
 import { USER_INFO } from './constants.tsx';
 
 const App: React.FC = () => {
@@ -33,6 +33,7 @@ const App: React.FC = () => {
           >
             <Projects />
           </motion.section>
+
           <motion.section 
             id="articles"
             initial={{ opacity: 0, y: 50 }}
@@ -42,16 +43,16 @@ const App: React.FC = () => {
           >
             <Articles />
           </motion.section>
+
           <motion.section 
-            id="contact"
+            id="about"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
           >
-            <Contact />
+            <About />
           </motion.section>
-
         </main>
 
         <footer className="py-12 border-t border-white/5 bg-slate-950/50 text-center">

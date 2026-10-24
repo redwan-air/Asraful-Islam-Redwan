@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
     };
 
     const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'articles', 'contact'];
+      const sections = ['home', 'about', 'projects', 'articles'];
       for (const id of sections) {
         const element = document.getElementById(id);
         if (element) {
@@ -38,7 +38,7 @@ const Navbar: React.FC = () => {
   const navLinks: { name: string; id: PageId; href: string }[] = [
     { name: 'Work', id: 'projects', href: '#projects' },
     { name: 'Articles', id: 'articles', href: '#articles' },
-    { name: 'Connect', id: 'contact', href: '#contact' },
+    { name: 'About', id: 'about', href: '#about' },
   ];
 
   return (
