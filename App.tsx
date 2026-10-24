@@ -51,6 +51,7 @@ const App: React.FC = () => {
           >
             <Contact />
           </motion.section>
+
         </main>
 
         <footer className="py-12 border-t border-white/5 bg-slate-950/50 text-center">
@@ -62,9 +63,6 @@ const App: React.FC = () => {
               &copy; {new Date().getFullYear()} {USER_INFO.fullName}.
             </p>
             <div className="mt-4 flex justify-center gap-6">
-              <a href={`mailto:${USER_INFO.email}`} className="text-[10px] font-mono text-slate-600 hover:text-blue-400 uppercase tracking-widest transition-colors">Email</a>
-              <a href={USER_INFO.github} className="text-[10px] font-mono text-slate-600 hover:text-blue-400 uppercase tracking-widest transition-colors">GitHub</a>
-              <a href={USER_INFO.linkedin} className="text-[10px] font-mono text-slate-600 hover:text-blue-400 uppercase tracking-widest transition-colors">LinkedIn</a>
             </div>
           </div>
         </footer>

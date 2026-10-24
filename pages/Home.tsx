@@ -22,8 +22,8 @@ const Hero: React.FC = () => {
               <h2 className="text-slate-500 font-mono text-xs uppercase tracking-[0.5em]">
                 The Personal Portfolio of
               </h2>
-              <h1 className="text-6xl md:text-8xl font-bold tracking-tighter text-white">
-                REDWAN
+              <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-white leading-tight">
+                ASRAFUL ISLAM <br /> REDWAN
                 <span className="text-blue-600">.</span>
               </h1>
             </div>
@@ -50,14 +50,19 @@ const Hero: React.FC = () => {
                 Contact Me
               </motion.a>
             </div>
+            
+
           </div>
 
-          <div className="flex-1 pt-16 md:pt-0">
+          <div className="flex-1">
+            <div className="relative group mb-8">
+              <img src="/air-redwan.png" alt="Redwan" className="w-full max-w-sm rounded-3xl border border-white/10 transition-transform duration-500 group-hover:scale-[1.02]" />
+            </div>
             <h3 className="text-3xl font-bold text-white mb-8 tracking-tight">Philosophy</h3>
             <p className="text-xl text-slate-300 leading-relaxed font-light mb-8 italic max-w-2xl">
               "Understand the problem. Build the solution. Learn from the result."
             </p>
-            <p className="text-slate-400 leading-relaxed max-w-2xl">
+            <p className="text-slate-400 leading-relaxed max-w-2xl mb-8">
               Programmer & Independent Builder. I explore technology by building things. My work revolves around software development, digital products, and solving practical problems through code.
             </p>
           </div>
