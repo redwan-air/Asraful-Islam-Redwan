@@ -22,7 +22,7 @@ const Hero: React.FC = () => {
               <h2 className="text-slate-500 font-mono text-xs uppercase tracking-[0.5em]">
                 The Personal Portfolio of
               </h2>
-              <h1 className="text-5xl md:text-6xl font-bold tracking-tighter text-white leading-tight">
+              <h1 className="text-6xl md:text-7xl font-bold tracking-tighter text-white leading-tight">
                 ASRAFUL ISLAM <br /> REDWAN
                 <span className="text-blue-600">.</span>
               </h1>
