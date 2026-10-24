@@ -1,9 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 import { PageId } from '../../types.ts';
 
 const Navbar: React.FC = () => {
+  const location = useLocation();
   const [isGlowing, setIsGlowing] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
@@ -13,39 +15,28 @@ const Navbar: React.FC = () => {
       setTimeout(() => setIsGlowing(false), 3000);
     };
 
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'articles'];
-      for (const id of sections) {
-        const element = document.getElementById(id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
-            setActiveSection(id);
-            break;
-          }
-        }
-      }
-    };
-
     window.addEventListener('glowSidebar', handleGlow);
-    window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('glowSidebar', handleGlow);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
+  useEffect(() => {
+    const path = location.pathname.substring(1);
+    setActiveSection(path || 'home');
+  }, [location]);
+
   const navLinks: { name: string; id: PageId; href: string }[] = [
-    { name: 'Work', id: 'projects', href: '#projects' },
-    { name: 'Articles', id: 'articles', href: '#articles' },
-    { name: 'About', id: 'about', href: '#about' },
+    { name: 'Work', id: 'projects', href: '/projects' },
+    { name: 'Articles', id: 'articles', href: '/articles' },
+    { name: 'About', id: 'about', href: '/about' },
   ];
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-4 w-full max-w-max">
       <div className={`bg-slate-950 px-8 py-4 rounded-full flex items-center gap-6 shadow-2xl border border-white/10 group/nav transition-all duration-500 ${isGlowing ? 'animate-rainbow-glow border-opacity-100 scale-105' : 'border-opacity-10'}`}>
         <motion.a 
-          href="#home"
+          href="/home"
           className="flex items-center group/logo focus:outline-none relative"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
