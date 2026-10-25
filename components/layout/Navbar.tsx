@@ -33,7 +33,11 @@ const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-4 w-full max-w-max">
+    <motion.nav 
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      className="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-4 w-full max-w-max"
+    >
       <div className={`bg-slate-950 px-8 py-4 rounded-full flex items-center gap-6 shadow-2xl border border-white/10 group/nav transition-all duration-500 ${isGlowing ? 'animate-rainbow-glow border-opacity-100 scale-105' : 'border-opacity-10'}`}>
         <Link
           to="/home"
@@ -66,7 +70,7 @@ const Navbar: React.FC = () => {
           ))}
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

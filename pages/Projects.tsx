@@ -22,7 +22,7 @@ const Projects: React.FC = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               whileHover={{ y: -10, transition: { duration: 0.2 } }}
-              viewport={{ once: true }}
+              viewport={{ once: true, amount: 0.2 }}
               className="group relative bg-white dark:bg-slate-900 rounded-3xl p-3 border border-slate-200 dark:border-white/10 transition-all duration-300"
             >
               {/* Glow Effect */}

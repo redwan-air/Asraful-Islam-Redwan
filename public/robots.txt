@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://air-redwan.cyou/sitemap.xml
