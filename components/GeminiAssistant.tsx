@@ -189,7 +189,7 @@ const GeminiAssistant: React.FC = () => {
         </div>
       ) : (
         <button onClick={() => setIsOpen(true)} className="w-16 h-16 glass rounded-2xl flex items-center justify-center transition-all hover:scale-110 shadow-2xl border border-white/10">
-          <img src="https://i.postimg.cc/HkYKGYnb/logo.png" className="h-8 w-auto opacity-70 group-hover:opacity-100" alt="Guide" />
+          <img src="/logo.png" className="h-8 w-auto opacity-70 group-hover:opacity-100" alt="Guide" />
         </button>
       )}
     </div>

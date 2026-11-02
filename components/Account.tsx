@@ -169,10 +169,10 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
       <div className="w-full max-w-md glass-premium p-10 md:p-12 rounded-[3rem] shadow-2xl border-white/10 relative z-10 animate-in zoom-in duration-500">
         <div className="mb-10 text-center">
           <div className="w-16 h-16 bg-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg shadow-blue-600/30">
-             <img src="https://i.postimg.cc/HkYKGYnb/logo.png" className="h-8 brightness-0 invert" alt="Logo" />
+             <img src="/logo.png" className="h-8 brightness-0 invert" alt="Logo" />
           </div>
-          <h2 className="text-4xl font-black text-white tracking-tighter">{isLogin ? 'Access Gate.' : 'Registration.'}</h2>
-          <p className="text-[10px] font-mono text-slate-500 uppercase tracking-[0.2em] mt-2">Personal Management System v2.5</p>
+          <h2 className="text-4xl font-black text-white tracking-tighter">{isLogin ? 'Sign In' : 'Create Account'}</h2>
+          <p className="text-[10px] font-mono text-slate-500 uppercase tracking-[0.2em] mt-2">Member Portal</p>
         </div>
         
         {error && (
@@ -190,16 +190,16 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
         <form onSubmit={handleAuth} className="space-y-5">
           {!isLogin && (
             <div className="group">
-              <label className="text-[10px] font-mono text-slate-500 mb-2 block uppercase tracking-widest transition-colors group-focus-within:text-blue-500">Subject Name</label>
+              <label className="text-[10px] font-mono text-slate-500 mb-2 block uppercase tracking-widest transition-colors group-focus-within:text-blue-500">Full Name</label>
               <input type="text" value={fullName} onChange={(e) => setFullName(e.target.value)} className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500 font-mono text-xs transition-all" required />
             </div>
           )}
           <div className="group">
-            <label className="text-[10px] font-mono text-slate-500 mb-2 block uppercase tracking-widest transition-colors group-focus-within:text-blue-500">Credential ID (Email)</label>
+            <label className="text-[10px] font-mono text-slate-500 mb-2 block uppercase tracking-widest transition-colors group-focus-within:text-blue-500">Email Address</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full bg-black/40 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-blue-500 font-mono text-xs transition-all" required />
           </div>
           <div className="relative group">
-            <label className="text-[10px] font-mono text-slate-500 mb-2 block uppercase tracking-widest transition-colors group-focus-within:text-blue-500">Passcode</label>
+            <label className="text-[10px] font-mono text-slate-500 mb-2 block uppercase tracking-widest transition-colors group-focus-within:text-blue-500">Password</label>
             <input 
               type={showPassword ? "text" : "password"} 
               value={password} 
@@ -220,11 +220,11 @@ const Account: React.FC<AccountProps> = ({ onAuthChange, currentProfile }) => {
             </button>
           </div>
           <button type="submit" disabled={loading} className="w-full py-5 bg-blue-600 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-blue-500 transition-all disabled:opacity-50 mt-4 text-[11px] shadow-lg shadow-blue-600/20">
-            {loading ? 'AUTHORIZING...' : (isLogin ? 'INITIATE_SESSION' : 'BEGIN_REGISTRY')}
+            {loading ? 'PROCESSING...' : (isLogin ? 'SIGN IN' : 'CREATE ACCOUNT')}
           </button>
         </form>
         <button onClick={() => setIsLogin(!isLogin)} className="w-full mt-8 text-[10px] font-mono text-slate-600 hover:text-blue-400 uppercase tracking-widest transition-colors">
-          {isLogin ? "Generate New Subject ID →" : "← Back to Authorization"}
+          {isLogin ? "Need an account? Sign Up →" : "← Back to Sign In"}
         </button>
       </div>
     </section>

@@ -40,7 +40,7 @@ const Navbar: React.FC = () => {
     >
       <div className={`bg-slate-950 px-8 py-4 rounded-full flex items-center gap-6 shadow-2xl border border-white/10 group/nav transition-all duration-500 ${isGlowing ? 'animate-rainbow-glow border-opacity-100 scale-105' : 'border-opacity-10'}`}>
         <Link
-          to="/home"
+          to="/"
           className="flex items-center group/logo focus:outline-none relative"
         >
           <img 

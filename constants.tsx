@@ -37,7 +37,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     description: 'The official visual identity of Asraful Islam Redwan.',
     dateTime: '2026-02-12 10:00',
     label: 'Official',
-    imageUrl: 'https://i.postimg.cc/HkYKGYnb/logo.png',
+    imageUrl: '/logo.png',
     visibility: 'public'
   }
 ];

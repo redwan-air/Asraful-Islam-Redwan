@@ -109,8 +109,8 @@ const About: React.FC = () => {
 
         {/* Footer Link */}
         <div className="flex justify-center">
-            <a href="https://www.air-redwan.cyou/" target="_blank" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-lg font-bold">
-               Official Website: https://www.air-redwan.cyou/ →
+            <a href="https://air-redwan.cyou/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-lg font-bold">
+               Official Website: https://air-redwan.cyou/ →
             </a>
         </div>
       </motion.div>
