@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App.tsx';
-import Hero from './pages/Home.tsx';
-import Projects from './pages/Projects.tsx';
-import Articles from './pages/Articles.tsx';
-import About from './pages/About.tsx';
+import './src/index.css';
 
 // Ensure the root element is ready before mounting
 const rootElement = document.getElementById('root');

@@ -15,7 +15,7 @@ const articlesData: Article[] = [
   {
     id: 'developeair-journey',
     title: 'THE JOURNEY OF DEVELOPEAIR',
-    thumbnail: 'https://i.postimg.cc/VNTX1Ntt/image.png',
+    thumbnail: '/articles/developeair-journey.png',
     date: 'October 6, 2025',
     description: `Developeair
 
@@ -109,19 +109,18 @@ A date. A beginning. A long-term vision.`,
   {
     id: 'nhspc-2026',
     title: 'First Contest Medal : NHSPC',
-    thumbnail: 'https://i.postimg.cc/52ZZ7ZJD/NHSPC-26.png',
+    thumbnail: '/articles/nhspc-26.png',
     date: 'June 10, 2026',
     description: "Participating in the National High School Programming Contest (NHSPC) 2026 Regional Round was a turning point in my programming journey, as it was my first-ever programming contest where I achieved a Regional Medal by solving two problems. NHSPC is widely recognized as one of the most prestigious programming contests in the region, serving as a vital platform for young programmers to showcase and refine their algorithmic problem-solving skills.\n\nBeyond the achievement itself, the experience allowed me to truly understand and enjoy the essence of competitive programming. I went through the full cycle of problem-solving—encountering repeated errors, debugging my code multiple times, rethinking my approach after failures, and persistently trying until I found the correct solution. The moment I saw “Accepted” after several attempts brought a deep sense of satisfaction and accomplishment, reinforcing my interest in this field. This contest helped me develop key skills such as logical thinking, debugging under pressure, and resilience, while also shifting my mindset from simply writing code to genuinely enjoying the process of solving problems. To make the experience even more memorable, I celebrated each solved problem by attaching a balloon to my desk, turning progress into a visual and motivating reward system. Overall, this achievement not only marked the beginning of my competitive programming journey but also ignited a lasting passion for tackling challenges and continuously improving myself.",
     images: [
-      "https://i.postimg.cc/BntYGNNn/702190400-122243363864047337-4649943769379417913-n.jpg",
-      "https://i.postimg.cc/G3Qq8652/700252926-122243363918047337-5207860341879541138-n.jpg",
-      "https://i.postimg.cc/G3Qq8652/700252926-122243363918047337-5207860341879541138-n.jpg"
+      "/articles/nhspc-medal-1.jpg",
+      "/articles/nhspc-medal-2.jpg"
     ]
   },
   {
     id: 'unfoundid-journey',
     title: 'Journey Of Unfoundid',
-    thumbnail: 'https://i.postimg.cc/QC1VGwZM/image.png',
+    thumbnail: '/articles/unfoundid-journey.png',
     date: 'October 6, 2026',
     description: "Introducing Unfoundid — A New Beginning\n\nToday, I’m introducing something new.\n\nUnfoundid.\n\nUnfoundid is a technology brand built around a simple idea: build useful things that solve real problems.\n\nRather than building products simply because they can be built, I want Unfoundid to focus on things that people can actually use—tools, products, and systems designed to make something easier, faster, or better.\n\nThe first phase of Unfoundid will focus on building a collection of free, genuinely useful products and tools.\n\nThese products will be available for anyone to use. The goal is simple: remove unnecessary barriers and make useful technology accessible to more people.\n\nOver time, I want Unfoundid to grow beyond individual tools into a broader technology ecosystem.\n\nThere will be experiments. There will be products that evolve. Some ideas will work, and some won't. But every project will be built with the same principle:\n\nIf we build it, it should be worth using.\n\nUnfoundid is also the beginning of a new chapter for me as a builder.\n\nI’m not launching it with the expectation that everything will be perfect from day one. I’m launching it to start building, learning, improving, and gradually turning ideas into products that people genuinely find useful.\n\nThe name itself has a small story behind it.\n\nWhile searching for the right name, I couldn't find one that felt right.\n\nSo I decided to call it Unfoundid.\n\nNow, instead of searching for what doesn't exist, I want to start building it.\n\nWelcome to Unfoundid.\n\nThis is only the beginning.\n\n— Asraful Islam Redwan\nFounder",
     images: []

@@ -1,5 +1,4 @@
-
-import { Project, Skill, GalleryItem, DocumentItem } from './types';
+import { Project, Skill } from './types';
 
 export const PROJECTS: Project[] = [
   {
@@ -28,31 +27,6 @@ export const SKILLS: Skill[] = [
   { name: 'Graph Theory', icon: '🕸️', category: 'other' },
   { name: 'Problem Solving', icon: '🧩', category: 'other' },
   { name: 'Data Structures', icon: '📊', category: 'other' }
-];
-
-export const GALLERY_ITEMS: GalleryItem[] = [
-  {
-    id: 'g-logo',
-    title: 'Official Logo',
-    description: 'The official visual identity of Asraful Islam Redwan.',
-    dateTime: '2026-02-12 10:00',
-    label: 'Official',
-    imageUrl: '/logo.png',
-    visibility: 'public'
-  }
-];
-
-export const DOCUMENT_ITEMS: DocumentItem[] = [
-  {
-    id: 'doc-private-1',
-    title: 'Development Roadmap',
-    description: 'Confidential strategic goals for the current academic year.',
-    dateTime: '2026-02-01 12:00',
-    labels: ['Official', 'Private'],
-    fileUrl: '#',
-    fileType: 'PDF',
-    visibility: 'private'
-  }
 ];
 
 export const USER_INFO = {
@@ -93,34 +67,9 @@ export const METADATA_CONFIG = {
     description:
       'Explore software projects and technology experiments by Asraful Islam Redwan.'
   },
-  skills: {
-    title: 'Technical Skills | Asraful Islam Redwan',
-    description:
-      'Explore the programming languages, technical skills, and problem-solving interests of Asraful Islam Redwan.'
-  },
-  gallery: {
-    title: 'Gallery | Asraful Islam Redwan',
-    description:
-      'Explore selected visual work and official assets of Asraful Islam Redwan.'
-  },
-  documents: {
-    title: 'Documents | Asraful Islam Redwan',
-    description:
-      'Explore publicly available documents and resources by Asraful Islam Redwan.'
-  },
-  achievements: {
-    title: 'Achievements | Asraful Islam Redwan',
-    description:
-      'Explore achievements and milestones of Asraful Islam Redwan.'
-  },
   articles: {
     title: 'Articles | Asraful Islam Redwan',
     description:
       'Read articles and thoughts by Asraful Islam Redwan.'
-  },
-  contact: {
-    title: 'Contact Asraful Islam Redwan',
-    description:
-      'Contact Asraful Islam Redwan through his official portfolio.'
   }
 };
